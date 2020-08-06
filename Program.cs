@@ -60,7 +60,7 @@ namespace OpenGLParser
                 if (ayuda)
                 {
                     ShowHelp(); //Muestra la ayuda
-                    return; //Rompe el seguimiento de los argumentos
+                    return; //Finaliza la aplicación
                 }
             }
 
@@ -70,7 +70,7 @@ namespace OpenGLParser
                 {
                     Console.WriteLine("Ya tiene descargada una versión del archivo gl.xml");
                     Console.Write("¿Desea realmente descargarlo nuevamente?(s/N):");
-                    //Console.WriteLine();
+                    
                     if (Console.ReadKey().KeyChar == 's')
                     {
                         Console.WriteLine();
@@ -129,9 +129,7 @@ namespace OpenGLParser
             if (textoprocesado) //Solo se procesa la escritura de texto si la anterior se ha terminado.
             {
                 textoprocesado = false;
-                //Console.SetCursorPosition(0, Console.CursorTop);
                 string s_line = "Downloading: ▕";
-                //Console.Write("Downloading: (");
                 int con_width = Console.WindowWidth - (s_line.Length + 6);
                 float i_variant = 100f / (float)(con_width);
                 int value = e.ProgressPercentage;
@@ -146,11 +144,9 @@ namespace OpenGLParser
                     {
                         progreschar = " ";
                     }
-                    //Console.Write(progreschar);
                     s_line += progreschar;
                 }
                 s_line += "▏ " + value.ToString("D3") + "%";
-                //Console.Write(") "+ f.ProgressPercentage.ToString() + "%");
                 Console.SetCursorPosition(0, cursortop);
                 Console.Write(s_line);
                 textoprocesado = true;
@@ -167,7 +163,7 @@ namespace OpenGLParser
             if (e.Error != null)
             {
                 Console.WriteLine();
-                Console.WriteLine(/*f2.Error.Message, */"Error en descarga de gl.xml");
+                Console.WriteLine("Error en descarga de gl.xml");
             }
             if ((e.Error == null) && (!e.Cancelled))
             {
@@ -193,7 +189,6 @@ namespace OpenGLParser
                     Console.WriteLine();
                     fs.Close();
                     downloaded = true;
-                    //glParser.Parse("./gl.xml", s_namespace, output, verbose);
                 }
                 else
                 {
