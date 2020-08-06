@@ -1,2 +1,5 @@
 bin/
 obj/
+.vs/
+gl.xml
+gl.xml.old
