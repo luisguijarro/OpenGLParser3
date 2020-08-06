@@ -6,7 +6,7 @@
     <ProjectGuid>{81252E36-2C22-43BF-92D2-F54A161AA668}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>OpenGLParser</RootNamespace>
-    <AssemblyName>OpenGLParser</AssemblyName>
+    <AssemblyName>oglp3</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
