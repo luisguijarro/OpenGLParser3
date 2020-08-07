@@ -41,6 +41,7 @@ namespace OpenGLParser
             }
 
             //Leemos los grupos, les adjuntamos los valores y así definimos los Enumeradores.
+            int ctop = Console.CursorTop;
 
             XmlNodeList grouplist = xdoc.SelectNodes("registry/groups/group"); //Obtenemos la lista de grupos
             if (grouplist.Count > 0) // Comprobamos que se obtengan resultados.
@@ -70,9 +71,9 @@ namespace OpenGLParser
                                 {
                                     if (verbose) //Mostramos el error de Parseo.
                                     {
-                                        Console.SetCursorPosition(0,Console.CursorTop);
+                                        Console.SetCursorPosition(0,ctop);
                                         Console.Write(new String(' ', Console.BufferWidth)); //Limpiamos linea a sobreescribir.
-                                        Console.SetCursorPosition(0,Console.CursorTop);
+                                        Console.SetCursorPosition(0,ctop);
                                         Console.WriteLine("    - Enum Parse Error: Value to " + s_valname + "not finded.");
                                     }
                                 }
@@ -80,9 +81,9 @@ namespace OpenGLParser
                             d_Enumerators.Add(s_groupName, tempgroup); // Añadimos Enumerador con valores al Diccionario.
                             if (verbose) //Mostramos el Enumerador Parseado.
                             {
-                                Console.SetCursorPosition(0,Console.CursorTop);
+                                Console.SetCursorPosition(0,ctop);
                                 Console.Write(new String(' ', Console.BufferWidth)); //Limpiamos linea a sobreescribir.
-                                Console.SetCursorPosition(0,Console.CursorTop);
+                                Console.SetCursorPosition(0,ctop);
                                 Console.Write("    - Enums Parsed "+d_Enumerators.Count.ToString("D3")+": "+s_groupName);
                             }
                         }
@@ -91,9 +92,9 @@ namespace OpenGLParser
             }
             if (verbose) //Mostrar Recuento final.
             {
-                Console.SetCursorPosition(0,Console.CursorTop);
+                Console.SetCursorPosition(0,ctop);
                 Console.Write(new String(' ', Console.BufferWidth)); //Limpiamos linea a sobreescribir.
-                Console.SetCursorPosition(0,Console.CursorTop);
+                Console.SetCursorPosition(0,ctop);
                 Console.WriteLine("Parsed " + d_Enumerators.Count + " OpenGL Enumerators.");
                 Console.WriteLine();
             }
