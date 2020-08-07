@@ -10,7 +10,7 @@ namespace OpenGLParser.DataObjects
         public Type Tipo; // Tipo de Valor del Enumerador ¿int? ¿uint? ¿long?....
         public glEnum()
         {
-            Tipo = typeof(int); //by default
+            Tipo = typeof(uint); //by default
             this.EnumValues = new Dictionary<string, glEnumValue>();
         }
     }
