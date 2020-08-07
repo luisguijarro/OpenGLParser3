@@ -3,11 +3,11 @@ using System.Xml;
 
 namespace OpenGLParser
 {
-    public partial class glWriter
+    public static partial class glWriter
     {
-        public glWriter()
+        public static void Write(string NameSpace, string outpath, bool verbose)
         {
-            
+            WriteEnums(NameSpace, outpath, verbose);
         }
     }
 }
