@@ -76,6 +76,11 @@ namespace OpenGLParser
                         Console.WriteLine();
                         Download_glxml();
                     }
+                    else
+                    {
+                        downloaded = true;
+                    }
+                    Console.WriteLine();
                 }
                 else
                 {
@@ -88,6 +93,7 @@ namespace OpenGLParser
             }
 
             //Parsear;
+            glParser.Parse("./gl.xml", s_namespace, output, verbose);
         }
 
         private static void ShowHelp()
@@ -95,13 +101,13 @@ namespace OpenGLParser
             Console.WriteLine("OpenGL Parser 3 Help Output:");
             Console.WriteLine("========================================================");
             Console.WriteLine("oglp3 [OPTION] <option value>");
-            Console.WriteLine("Arguments:");
+            Console.WriteLine("Options:");
             Console.WriteLine("  -v  -> Verbose Mode.");
             Console.WriteLine("  -d  -> Download new gl.xml file.");
             Console.WriteLine("         If gl.xml file dont exist -d is by default.");
             Console.WriteLine("  -o  -> Output Path of .cs Files. (./output/ by default)");
             Console.WriteLine("  -n  -> NameSpace of .cs Files. (OpenGL by default)");
-            Console.WriteLine("  -h  -> Show this Help.");
+            Console.WriteLine("  -h  -> Show this Help. Ignore another options.");
         }
 
         private static void Download_glxml()
@@ -117,7 +123,6 @@ namespace OpenGLParser
                 
                 Console.WriteLine();
                 Console.WriteLine("Descargando gl.xml desde repositorio oficial.");
-                Console.WriteLine();
                 cursortop = Console.CursorTop;
                 textoprocesado = true;
                 wc.DownloadFileAsync(uri, "./gl.xml.temp");
@@ -186,7 +191,6 @@ namespace OpenGLParser
                     Console.WriteLine();
                     Console.WriteLine();
                     Console.WriteLine("Descarga de gl.xml Realizada con Exito");
-                    Console.WriteLine();
                     fs.Close();
                     downloaded = true;
                 }
