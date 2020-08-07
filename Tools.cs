@@ -1,35 +1,37 @@
 using System;
+using System.Globalization;
 
 namespace OpenGLParser
 {
     public static class Tools
     {
-        private static Type GetTypeFromStringValue(string s_value)
+        private static Type GetTypeFromStringValue(string value)
         {
+            string s_value = value.Replace("0x", "");
             Type ret = typeof(uint);
             uint uiresult = 0;
-            if (uint.TryParse(s_value,out uiresult))
+            if (uint.TryParse(s_value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out uiresult))
             {
                 return typeof(uint);
             }
             else
             {
                 int iresult = 0;
-                if (int.TryParse(s_value,out iresult))
+                if (int.TryParse(s_value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out iresult))
                 {
                     return typeof(int);
                 }
                 else
                 {
                     ulong ulresult = 0;
-                    if (ulong.TryParse(s_value,out ulresult))
+                    if (ulong.TryParse(s_value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out ulresult))
                     {
                         return typeof(ulong);
                     }
                     else
                     {
                         long lresult = 0;
-                        if (long.TryParse(s_value,out lresult))
+                        if (long.TryParse(s_value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out lresult))
                         {
                             return typeof(long);
                         }
