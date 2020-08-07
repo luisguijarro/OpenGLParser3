@@ -10,7 +10,7 @@ namespace OpenGLParser
     {
         public static Dictionary<string, glEnum> d_Enumerators; //Nombre del enumerador, Enumerador.
         private static Dictionary<string,string> d_Valores; //Almacena todos los valores. <nombre,valor>
-        public static void ReadEnums(XmlDocument xdoc, bool verbose)
+        private static void ReadEnums(XmlDocument xdoc, bool verbose)
         {
             d_Enumerators = new Dictionary<string, glEnum>();
             d_Valores = new Dictionary<string, string>();
@@ -95,6 +95,7 @@ namespace OpenGLParser
                 Console.Write(new String(' ', Console.BufferWidth)); //Limpiamos linea a sobreescribir.
                 Console.SetCursorPosition(0,Console.CursorTop);
                 Console.WriteLine("Parsed " + d_Enumerators.Count + " OpenGL Enumerators.");
+                Console.WriteLine();
             }
         }
     }
