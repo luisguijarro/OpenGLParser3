@@ -14,7 +14,6 @@ namespace OpenGLParser
         static bool textoprocesado;
         public static void Main(string[] args)
         {
-            Console.WriteLine("OpenGL Parser 3");
             output = "./output/";
             s_namespace = "OpenGL";
             for (int i = 0; i < args.Length; i++)
@@ -64,6 +63,12 @@ namespace OpenGLParser
                 }
             }
 
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("OpenGL Parser 3");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("========================================================");
+            Console.ResetColor();
+
             if (download)
             {
                 if (System.IO.File.Exists("./gl.xml"))
@@ -98,8 +103,11 @@ namespace OpenGLParser
 
         private static void ShowHelp()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("OpenGL Parser 3 Help Output:");
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("========================================================");
+            Console.ResetColor();
             Console.WriteLine("oglp3 [OPTION] <option value>");
             Console.WriteLine("Options:");
             Console.WriteLine("  -v  -> Verbose Mode.");
@@ -135,9 +143,13 @@ namespace OpenGLParser
             {
                 textoprocesado = false;
                 string s_line = "Downloading: ▕";
-                int con_width = Console.WindowWidth - (s_line.Length + 6);
+                Console.SetCursorPosition(0, cursortop);
+                Console.Write(s_line);
+                Console.ForegroundColor = ConsoleColor.Green;
+                int con_width = Console.WindowWidth - (s_line.Length + 7);
                 float i_variant = 100f / (float)(con_width);
                 int value = e.ProgressPercentage;
+                s_line = "";
                 for (int i = 0; i < con_width; i++)
                 {
                     string progreschar = " ";
@@ -147,12 +159,17 @@ namespace OpenGLParser
                     }
                     else
                     {
-                        progreschar = " ";
+                        Console.ResetColor();
+                        progreschar = "_";
                     }
-                    s_line += progreschar;
+                    Console.Write(progreschar);
                 }
-                s_line += "▏ " + value.ToString("D3") + "%";
-                Console.SetCursorPosition(0, cursortop);
+                Console.Write(s_line);
+                Console.ResetColor();
+                s_line = "▏ ";
+                Console.Write(s_line);
+                s_line =  value.ToString("D3") + "%";
+                //Console.SetCursorPosition(0, cursortop);
                 Console.Write(s_line);
                 textoprocesado = true;
             }
