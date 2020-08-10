@@ -12,7 +12,7 @@ namespace OpenGLParser
         {
             if (verbose) //Si Verbose mode mostramos inicio del proceso.
             {
-                Console.WriteLine("Generating File: Enums.cs");
+                Console.WriteLine(); Console.WriteLine("Generating File: Enums.cs");
             }
             if (!Directory.Exists(outpath)) // Si la ruta no existe la creamos
             {
@@ -63,7 +63,10 @@ namespace OpenGLParser
 
             if (verbose) //Si Verbose mode mostramos la finalización del proceso.
             {
-                Console.WriteLine("Generated File: Enums.cs");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Generated File");
+                Console.ResetColor(); 
+                Console.WriteLine(": Enums.cs");
             }
         }
     }
