@@ -9,7 +9,10 @@ namespace OpenGLParser
         public static void Parse(XmlDocument xdoc, bool verbose)
         {
             //this.xdoc = xmlDocument;
+            ReadTypes(xdoc, verbose);
             ReadEnums(xdoc, verbose);
+            ReadCommands(xdoc, verbose);
+            
         }
     }
 }
