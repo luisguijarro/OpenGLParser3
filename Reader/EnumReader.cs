@@ -95,8 +95,11 @@ namespace OpenGLParser
                 Console.SetCursorPosition(0,ctop);
                 Console.Write(new String(' ', Console.BufferWidth)); //Limpiamos linea a sobreescribir.
                 Console.SetCursorPosition(0,ctop);
-                Console.WriteLine("Parsed " + d_Enumerators.Count + " OpenGL Enumerators.");
-                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Parsed ");
+                Console.ResetColor(); 
+                Console.WriteLine(d_Enumerators.Count + " OpenGL Enumerators.");
+                //Console.WriteLine();
             }
         }
     }
