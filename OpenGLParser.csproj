@@ -43,6 +43,10 @@
     <Compile Include="glReader.cs" />
     <Compile Include="glWriter.cs" />
     <Compile Include="Tools.cs" />
+    <Compile Include="Reader\TypesReader.cs" />
+    <Compile Include="Reader\CommandReader.cs" />
+    <Compile Include="DataObjects\glCommand.cs" />
+    <Compile Include="DataObjects\glParam.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
