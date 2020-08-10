@@ -99,6 +99,7 @@ namespace OpenGLParser
 
             //Parsear;
             glParser.Parse("./gl.xml", s_namespace, output, verbose);
+            Console.WriteLine();
         }
 
         private static void ShowHelp()
