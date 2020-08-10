@@ -3,20 +3,21 @@
 compi()
 {
     echo "Compilando OpenGLParser 3"
-    csc -nologo -recurse:./*.cs -out:./bin/Debug/oglp3.exe
+    csc -nologo -debug:full -recurse:./*.cs -out:./bin/Debug/oglp3.exe
     echo "Compilación Finalizada!"
+    echo ""
 }
 
 case "$1" in
     -h)
     echo ""
     echo "\e[1m\e[38;2;255;128;128mOpenGL Parser 3 compiler script."
-    echo "\e[38;2;128;128;255m==========================================="
+    echo "\e[38;2;128;128;255m==============================================="
     echo "\e[0muse -x argument for execute before compile."
-    echo "You can use de exec arguments."
-    echo "Example: \e[38;2;128;128;255m./compile.sh -x -d"
-    echo "\e[0mThis example will compile de proyect and "
-    echo "ejecute the result with -d argument."
+    echo "       You can use de exec arguments."
+    echo "       Example: \e[38;2;128;128;255m./compile.sh -x -d"
+    echo "       \e[0mThis example will compile de proyect and "
+    echo "       ejecute the result with -d argument."
     return 0;
     break
     ;;
