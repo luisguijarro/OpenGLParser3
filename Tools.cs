@@ -111,5 +111,93 @@ namespace OpenGLParser
         {
             return GetPrevailingType(t1, GetTypeFromStringValue(s_value));
         }
+
+        public static string GetTypeFromGLType(string tipo)
+        {
+            string ret = "";
+            bool b_unsigned = tipo.Contains("unsigned");
+            
+            if (tipo.Contains(" int"))
+            {
+                return b_unsigned ? "uint": "int";
+            }
+            if (tipo.Contains(" char"))
+            {
+                return b_unsigned ? "byte": "sbyte";
+            }
+            
+            if (tipo.Contains("_int8"))
+            {
+                return "sbyte";
+            }
+            if (tipo.Contains("_uint8"))
+            {
+                return "byte";
+            }
+
+            if (tipo.Contains("_int16"))
+            {
+                return "short";
+            }
+            if (tipo.Contains("_uint16"))
+            {
+                return "ushort";
+            }
+
+            if (tipo.Contains("_int32"))
+            {
+                return "int";
+            }
+            if (tipo.Contains("_uint32"))
+            {
+                return "uint";
+            }
+            
+            if (tipo.Contains("_int64"))
+            {
+                return "long";
+            }
+            if (tipo.Contains("_uint64"))
+            {
+                return "ulong";
+            }
+            
+            if (tipo.Contains("_ssize"))
+            {
+                return "int";
+            }
+            
+            if (tipo.Contains("_float"))
+            {
+                return "float";
+            }
+
+            if (tipo.Contains("_double"))
+            {
+                return "double";
+            }
+
+            if (tipo.Contains("void *"))
+            {
+                return "IntPtr";
+            }
+
+            if (tipo.Contains("_intptr"))
+            {
+                return "IntPtr";
+            }
+
+            if (tipo.Contains("void"))
+            {
+                return "void";
+            }
+
+            if (tipo.Contains(" struct "))
+            {
+                return "IntPtr";
+            }
+
+            return ret;
+        }
     }
 }
