@@ -13,7 +13,7 @@ namespace OpenGLParser
 
             //Procesar Parseo fase a fase.
             glReader.Parse(xdoc, verbose);
-
+            //Escribir archivos .cs
             glWriter.Write(@namespace, destination, verbose);
         }
     }
