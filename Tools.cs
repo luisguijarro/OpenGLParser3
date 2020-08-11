@@ -38,19 +38,50 @@ namespace OpenGLParser
                     }
                 }
             }
+            //Para valores negativos parsear sin hexadecimal:
+            if (uint.TryParse(s_value, out uiresult))
+            {
+                return typeof(uint);
+            }
+            else
+            {
+                int iresult = 0;
+                if (int.TryParse(s_value, out iresult))
+                {
+                    return typeof(int);
+                }
+            }
+
             return ret;
         }
     
         private static Type GetPrevailingType(Type t1, Type t2)
         {
-            Type t_uint = typeof(int);
+            Type t_uint = typeof(uint);
             Type t_int = typeof(int);
-            Type t_ulong = typeof(int);
-            Type t_long = typeof(int);
+            Type t_ulong = typeof(ulong);
+            Type t_long = typeof(long);
 
             if (t1 == t_uint)
             {
                 if (t2 == t_int)
+                {
+                    return t2;
+                }
+                if (t2 == t_ulong)
+                {
+                    return t2;
+                }
+                if (t2 == t_long)
+                {
+                    return t2;
+                }
+                return t1; //t2 tambien es uint.
+            }
+
+            if (t1 == t_int)
+            {
+                if (t2 == t_uint)
                 {
                     return t1;
                 }
@@ -62,24 +93,7 @@ namespace OpenGLParser
                 {
                     return t2;
                 }
-                return t1;
-            }
-
-            if (t1 == t_int)
-            {
-                if (t2 == t_uint)
-                {
-                    return t2;
-                }
-                if (t2 == t_ulong)
-                {
-                    return t2;
-                }
-                if (t2 == t_long)
-                {
-                    return t2;
-                }
-                return t1;
+                return t1; //t2 tambien es int.
             }
 
 
@@ -95,15 +109,20 @@ namespace OpenGLParser
                 }
                 if (t2 == t_ulong)
                 {
-                    return t2;
+                    return t1;
                 }
-                return t1;
+                return t1; //t2 tambien es long
             }
 
             if (t1 == t_ulong)
             {
-                return t1;
+                if (t2 == t_long)
+                {
+                    return t2;
+                }
+                return t1; //t2 tambien es ulong
             }
+            
             return t1; //Para que no falle la compilacion.
         }
     
@@ -117,6 +136,10 @@ namespace OpenGLParser
             string ret = "";
             bool b_unsigned = tipo.Contains("unsigned");
             
+            if (tipo.Contains(" short"))
+            {
+                return b_unsigned ? "ushort": "short";
+            }
             if (tipo.Contains(" int"))
             {
                 return b_unsigned ? "uint": "int";
@@ -172,7 +195,7 @@ namespace OpenGLParser
                 return "float";
             }
 
-            if (tipo.Contains("_double"))
+            if (tipo.Contains("double"))
             {
                 return "double";
             }
@@ -193,6 +216,11 @@ namespace OpenGLParser
             }
 
             if (tipo.Contains(" struct "))
+            {
+                return "IntPtr";
+            }
+
+            if (tipo.Contains("GLintptr"))
             {
                 return "IntPtr";
             }
