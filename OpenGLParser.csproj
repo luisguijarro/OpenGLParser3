@@ -34,19 +34,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataObjects\glEnum.cs" />
-    <Compile Include="DataObjects\glEnumValue.cs" />
-    <Compile Include="Reader\EnumReader.cs" />
-    <Compile Include="Writer\EnumWriter.cs" />
     <Compile Include="glParser.cs" />
     <Compile Include="glReader.cs" />
     <Compile Include="glWriter.cs" />
     <Compile Include="Tools.cs" />
-    <Compile Include="Reader\TypesReader.cs" />
-    <Compile Include="Reader\CommandReader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DataObjects\glEnum.cs" />
+    <Compile Include="DataObjects\glEnumValue.cs" />
     <Compile Include="DataObjects\glCommand.cs" />
     <Compile Include="DataObjects\glParam.cs" />
+    <Compile Include="DataObjects\glVersion.cs" />
+    <Compile Include="Writer\EnumWriter.cs" />
+    <Compile Include="Writer\CommandWriter.cs" />
+    <Compile Include="Writer\DelegatesWriter.cs" />
+    <Compile Include="Writer\InternalsWriter.cs" />
+    <Compile Include="Writer\InternalGLToolsWriter.cs" />
+    <Compile Include="Writer\InitDelWriter.cs" />
+    <Compile Include="Reader\EnumReader.cs" />
+    <Compile Include="Reader\TypesReader.cs" />
+    <Compile Include="Reader\CommandReader.cs" />
+    <Compile Include="Reader\VersionReader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
