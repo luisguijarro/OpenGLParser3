@@ -76,7 +76,7 @@ namespace OpenGLParser
 
                         paramtemp.esArray = paramList[p].Attributes["len"] != null; //Si tiene len es un Array.
 
-                        commandTemp.Parametros.Add(s_ParamName, paramtemp);
+                        commandTemp.Parametros.Add(FixedParamName(s_ParamName), paramtemp); //Añadimos parametro con Corrección de nombre.
                     }
 
 
@@ -91,6 +91,29 @@ namespace OpenGLParser
                 Console.Write("Parsed ");
                 Console.ResetColor(); 
                 Console.WriteLine(Commandos.Count + " OpenGL Commands."); 
+            }
+        }
+    
+        private static string FixedParamName(string @param)
+        {
+            switch(@param)
+            {
+                case "params":
+                    return "@params";
+                case "ref":
+                    return "@ref";
+                case "string":
+                    return "@string";
+                case "event":
+                    return "@event";
+                case "object":
+                    return "@object";
+                case "base":
+                    return "@base";
+                case "in":
+                    return "@in";
+                default:
+                    return @param;
             }
         }
     }
