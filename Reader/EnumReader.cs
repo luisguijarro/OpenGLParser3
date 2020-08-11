@@ -9,11 +9,11 @@ namespace OpenGLParser
     public static partial class glReader
     {
         public static Dictionary<string, glEnum> d_Enumerators; //Nombre del enumerador, Enumerador.
-        private static Dictionary<string,string> d_Valores; //Almacena todos los valores. <nombre,valor>
+        private static Dictionary<string,glEnumValue> d_Valores; //Almacena todos los valores. <nombre,valor>
         private static void ReadEnums(XmlDocument xdoc, bool verbose)
         {
             d_Enumerators = new Dictionary<string, glEnum>();
-            d_Valores = new Dictionary<string, string>();
+            d_Valores = new Dictionary<string, glEnumValue>();
 
             //Lo primero es leer todos los Enumeradores y sus valores.
             if (verbose) { Console.WriteLine(); Console.WriteLine("Parsing OpenGL Enumerators."); }
@@ -33,7 +33,9 @@ namespace OpenGLParser
 
                             if (!d_Valores.ContainsKey(s_valname)) //Comprobamos que el diccionario no tenga ya el valor
                             {
-                                d_Valores.Add(s_valname, s_val); //Añadimos el valor al dicionario
+                                string group = enumvalues[a].Attributes["group"] != null ? enumvalues[a].Attributes["group"].Value : "";
+                                        
+                                d_Valores.Add(s_valname, new glEnumValue(s_valname, s_val, group)); //Añadimos el valor al dicionario
                             }
                         }
                     }
@@ -63,8 +65,8 @@ namespace OpenGLParser
                                 {
                                     if (!tempgroup.EnumValues.ContainsKey(s_valname)) //Comprovamos si ya existe en el enumerador
                                     {
-                                        tempgroup.EnumValues.Add(s_valname, new glEnumValue(s_valname,d_Valores[s_valname])); //Si no existe lo añadimos.
-                                        tempgroup.Tipo = Tools.GetPrevailingType(tempgroup.Tipo, d_Valores[s_valname]);
+                                        tempgroup.EnumValues.Add(s_valname, d_Valores[s_valname]); //Si no existe lo añadimos.
+                                        tempgroup.Tipo = Tools.GetPrevailingType(tempgroup.Tipo, d_Valores[s_valname].Value);
                                     }
                                 }
                                 else
@@ -90,6 +92,32 @@ namespace OpenGLParser
                     }
                 }
             }
+
+            #region Generar Enumeradores no listados en Groups
+
+            foreach(string keyValue in d_Valores.Keys) //Recorremos todos los valores recogidos
+            {
+                string[] grupos = d_Valores[keyValue].Group.Split(','); //Obtenemos lista de grupos
+                for (int g=0;g<grupos.Length;g++) //Recorremos lista de grupos.
+                {
+                    string grupo = grupos[g]; //Obtenemos el nombre del grupo del valor
+                    if (grupo.Length > 0) //Si el valor tenia definido grupo...
+                    {
+                        if (!d_Enumerators.ContainsKey(grupo)) //Comprobamos si el grupo existe
+                        {
+                            d_Enumerators.Add(grupo, new glEnum()); //Si no existe lo creamos.
+                        }
+                        if (!d_Enumerators[grupo].EnumValues.ContainsKey(keyValue)) //Comprobamos si el grupo tiene ya el valor.
+                        {
+                            d_Enumerators[grupo].EnumValues.Add(keyValue, d_Valores[keyValue]); //Si no tiene el valor se lo añadimos.
+                            d_Enumerators[grupo].Tipo = Tools.GetPrevailingType(d_Enumerators[grupo].Tipo, d_Valores[keyValue].Value); //Corregimos tipo de valor de enumerador.
+                        }                
+                    }
+                }                
+            }
+
+            #endregion
+
             if (verbose) //Mostrar Recuento final.
             {
                 Console.SetCursorPosition(0,ctop);
