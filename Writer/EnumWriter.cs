@@ -40,7 +40,7 @@ namespace OpenGLParser
             for (int key = 0;key<EnumKeysList.Count;key++) //Recorremos la lista de Enumeradores
             {
                 DataObjects.glEnum glenumerator = glReader.d_Enumerators[EnumKeysList[key]]; //Recogemos el Enumerador.
-                file.WriteLine(tab+"enum " + EnumKeysList[key] + " : " + glenumerator.Tipo.ToString().Replace("System.", ""));  //Enumerador.
+                file.WriteLine(tab+"public enum " + EnumKeysList[key] + " : " + glenumerator.Tipo.ToString().Replace("System.", ""));  //Enumerador.
                 file.WriteLine(tab+"{"); // Apertura de enumerador.
 
                 List<string> keyList = new List<string>(glenumerator.EnumValues.Keys); //Obtenemos lista de keys del diccionario para ordenarlas alfabeticamente.
