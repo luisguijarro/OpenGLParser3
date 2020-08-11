@@ -44,7 +44,7 @@ namespace OpenGLParser
                             v_name = typeslist[i].SelectSingleNode("name").InnerText; //Obtenemos el nombre del tipo GL
                             if (typeslist[i].SelectSingleNode("apientry") != null) //Si tiene <apientry/> es un delegado
                             {
-                                v_type = "delegate";
+                                v_type = "Delegate";
                             }
                             else
                             {
