@@ -61,6 +61,11 @@ namespace OpenGLParser
                     file.WriteLine();
                 }
 
+                //Escribir info de Versión.
+                string s_comentario = "///<sumary> Available from OpenGL verion " + commandTemp.FromVersion;
+                s_comentario += commandTemp.DeprecatedVersion.Length > 0 ? " Deprecated in OpenGL version " + commandTemp.DeprecatedVersion : "";
+                s_comentario += "</sumary>";
+
                 //Ahora Escribir Método.
                 string s_metodo = tab+tab+"public static "; //Iniciamos escritura del método.
                 s_metodo += commandTemp.EsInseguro ? "unsafe " : "";
@@ -73,6 +78,7 @@ namespace OpenGLParser
                 }
                 if (commandTemp.Parametros.Count>0) {s_metodo = s_metodo.Substring(0,s_metodo.Length-2);} //Quitamos última coma y espacio si se han escrito parametros.
                 s_metodo += ")"; //Cerramos enunciado de método.
+                file.WriteLine(s_comentario); //Escribimos comentario de versión.
                 file.WriteLine(s_metodo); //Escribimos enunciado de método en archivo.
                 file.WriteLine(tab+tab+"{"); //Abrimos metodo
 
