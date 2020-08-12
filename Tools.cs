@@ -227,5 +227,29 @@ namespace OpenGLParser
 
             return ret;
         }
+   
+
+        public static string FixedParamName(string @param)
+        {
+            switch(@param)
+            {
+                case "params":
+                    return "@params";
+                case "ref":
+                    return "@ref";
+                case "string":
+                    return "@string";
+                case "event":
+                    return "@event";
+                case "object":
+                    return "@object";
+                case "base":
+                    return "@base";
+                case "in":
+                    return "@in";
+                default:
+                    return @param;
+            }
+        }
     }
 }
