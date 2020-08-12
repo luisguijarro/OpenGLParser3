@@ -12,6 +12,7 @@ namespace OpenGLParser.DataObjects
         public Dictionary<string, glParam> Parametros; //<nombre del parametro, Parametro>,
         public glCommand()
         {
+            EsInseguro = false;
             FromVersion = "";
             DeprecatedVersion = "";
             ReturnedTipe = "void"; //void por defecto.
