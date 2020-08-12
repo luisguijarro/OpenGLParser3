@@ -5,6 +5,7 @@ namespace OpenGLParser.DataObjects
 {
     public class glCommand
     {
+        public bool EsInseguro;
         public string FromVersion; //Versión desde la que aparece
         public string DeprecatedVersion; //Versión en la que se marca como Obsoleto
         public string ReturnedTipe; //Tipo de dato que retorna.
