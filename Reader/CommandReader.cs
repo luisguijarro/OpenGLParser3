@@ -54,6 +54,7 @@ namespace OpenGLParser
                         }
                         else
                         {
+                            paramtemp.esPuntero = paramList[p].InnerText.Contains("*"); //Si tiene asterisco es un puntero.
                             s_paramType = paramList[p].SelectSingleNode("ptype").InnerText; //Obtenemos tipo del parametro.
                             if (s_paramType == "GLenum") //Si es un enumerador 
                             {
