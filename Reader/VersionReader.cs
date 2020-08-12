@@ -28,7 +28,7 @@ namespace OpenGLParser
                         verTemp.Metodos.Add(MetodosEnVersion[m].Attributes["name"].Value); //Añadimos metodo a la lista de soportados.
                         if (Commandos.ContainsKey(MetodosEnVersion[m].Attributes["name"].Value)) //Comprobanmos que el método existe.
                         {
-                            if (Commandos[MetodosEnVersion[m].Attributes["name"].Value].FromVersion != "") //Comprovamos si ha existido antes.
+                            if (Commandos[MetodosEnVersion[m].Attributes["name"].Value].FromVersion == "") //Comprovamos si ha existido antes.
                             {
                                 Commandos[MetodosEnVersion[m].Attributes["name"].Value].FromVersion = s_versionNumber; //Establecemos esta versión de OpenGL como la primera
                             }
@@ -41,7 +41,7 @@ namespace OpenGLParser
                         verTemp.Obsoletos.Add(MetodosEliminados[r].Attributes["name"].Value); //Añadimos metodo a la lista de obsoletos.
                         if (Commandos.ContainsKey(MetodosEliminados[r].Attributes["name"].Value)) //Comprobanmos que el método existe.
                         {
-                            if (Commandos[MetodosEliminados[r].Attributes["name"].Value].DeprecatedVersion != "") //Comprovamos si se ha depreciado anteriormente
+                            if (Commandos[MetodosEliminados[r].Attributes["name"].Value].DeprecatedVersion == "") //Comprovamos si se ha depreciado anteriormente
                             {
                                 Commandos[MetodosEliminados[r].Attributes["name"].Value].DeprecatedVersion = s_versionNumber; //Se marca como obsoleta a partir de esta versión.
                             }
