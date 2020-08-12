@@ -8,6 +8,7 @@ namespace OpenGLParser.DataObjects
         public string tipo;
         // public int len; //Si es un Array tiene 0 o más
         public bool esArray;
+        public bool esPuntero;
         public glParam()
         {
             tipo = "";
