@@ -62,7 +62,12 @@ namespace OpenGLParser
                 }
 
                 //Escribir info de Versión.
-                string s_comentario = tab+tab+"///<sumary> Available from OpenGL verion " + commandTemp.FromVersion;
+                string s_comentario = tab+tab+"///<sumary> ";
+                if (commandTemp.FromVersion.Length>0)
+                {
+                    s_comentario += "Available from OpenGL version " + commandTemp.FromVersion;
+                    
+                }
                 s_comentario += commandTemp.DeprecatedVersion.Length > 0 ? " Deprecated in OpenGL version " + commandTemp.DeprecatedVersion : "";
                 s_comentario += "</sumary>";
 
