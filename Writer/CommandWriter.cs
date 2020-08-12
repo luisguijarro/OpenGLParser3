@@ -63,11 +63,13 @@ namespace OpenGLParser
 
                 //Ahora Escribir Método.
                 string s_metodo = tab+tab+"public static "; //Iniciamos escritura del método.
+                s_metodo += commandTemp.EsInseguro ? "unsafe " : "";
                 s_metodo += commandTemp.ReturnedTipe+" "+CommandsKeysList[key]+"(";
                 foreach(string keyParam in commandTemp.Parametros.Keys) //Recorremos lista deparametros para añadirlos uno a uno.
                 {                    
                     glParam param = commandTemp.Parametros[keyParam]; //Obtenemos el parametro.
-                    s_metodo += param.tipo + (param.esArray? "[] ": " ") + keyParam + ", "; //Añadimos tipo, si es array y el nombre del parametro.
+                    //s_metodo += param.tipo + (param.esArray? "[] ": " ") + keyParam + ", "; //Añadimos tipo, si es array y el nombre del parametro.
+                    s_metodo += param.tipo + (param.esPuntero? "* ": " ") + keyParam + ", "; //Añadimos tipo, si es puntero y el nombre del parametro.
                 }
                 if (commandTemp.Parametros.Count>0) {s_metodo = s_metodo.Substring(0,s_metodo.Length-2);} //Quitamos última coma y espacio si se han escrito parametros.
                 s_metodo += ")"; //Cerramos enunciado de método.
