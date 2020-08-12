@@ -64,11 +64,13 @@ namespace OpenGLParser
                 }
 
                 //Crear Delegados.
-                string s_delegate = tab + tab + "internal delegate " + commandTemp.ReturnedTipe + " " + CommandsKeysList[key] + "(";
+                string s_delegate = tab + tab + "internal " + (commandTemp.EsInseguro? "unsafe " : "") + "delegate ";
+                s_delegate += commandTemp.ReturnedTipe + " " + CommandsKeysList[key] + "(";
                 foreach(string keyParam in commandTemp.Parametros.Keys) //Recorremos lista deparametros para añadirlos uno a uno.
                 {                    
                     glParam param = commandTemp.Parametros[keyParam]; //Obtenemos el parametro.
-                    s_delegate += param.tipo + (param.esArray? "[] ": " ") + keyParam + ", "; //Añadimos tipo, si es array y el nombre del parametro.
+                    //s_delegate += param.tipo + (param.esArray? "[] ": " ") + keyParam + ", "; //Añadimos tipo, si es array y el nombre del parametro.
+                    s_delegate += param.tipo + (param.esPuntero? "* ": " ") + keyParam + ", "; //Añadimos tipo, si es array y el nombre del parametro.
                 }
                 if (commandTemp.Parametros.Count>0) {s_delegate = s_delegate.Substring(0,s_delegate.Length-2);} //Quitamos última coma y espacio si se han escrito parametros.
                 s_delegate += ");"; //Cerramos enunciado de método.
