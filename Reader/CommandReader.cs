@@ -8,10 +8,10 @@ namespace OpenGLParser
 {
     public static partial class glReader
     {
-        public static Dictionary<string, glCommand> Commandos; // <NombreMetodo, Metodo>
+        public static Dictionary<string, glCommand> d_Commandos; // <NombreMetodo, Metodo>
         public static void ReadCommands(XmlDocument xdoc, bool verbose)
         {
-            Commandos = new Dictionary<string, glCommand>();
+            d_Commandos = new Dictionary<string, glCommand>();
             if (verbose) { Console.WriteLine(); Console.WriteLine("Parsing OpenGL Commands."); }
 
             XmlNodeList commandlist = xdoc.SelectNodes("registry/commands[@namespace='GL']/command"); //Obtenemos lista de commandos
@@ -82,7 +82,7 @@ namespace OpenGLParser
                     }
 
 
-                    Commandos.Add(commandName, commandTemp); //Añadir commanods al diccionario.
+                    d_Commandos.Add(commandName, commandTemp); //Añadir commanods al diccionario.
                 }
             }
         
@@ -92,7 +92,7 @@ namespace OpenGLParser
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Parsed ");
                 Console.ResetColor(); 
-                Console.WriteLine(Commandos.Count + " OpenGL Commands."); 
+                Console.WriteLine(d_Commandos.Count + " OpenGL Commands."); 
             }
         }
     }
