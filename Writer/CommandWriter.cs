@@ -35,10 +35,10 @@ namespace OpenGLParser
 
             string tab = "\t"; //Definimos tabulación.
 
-            file.WriteLine(tab+"public static class GL"); //Declaramos Clase Estatica contenedora de los métodos.
+            file.WriteLine(tab+"public static partial class GL"); //Declaramos Clase Estatica contenedora de los métodos.
             file.WriteLine(tab+"{"); //Abrimos clase 
 
-            List<string> CommandsKeysList = new List<string>(glReader.Commandos.Keys); //Creamos lista de nombres de comandos para ordenar.
+            List<string> CommandsKeysList = new List<string>(glReader.d_Commandos.Keys); //Creamos lista de nombres de comandos para ordenar.
             CommandsKeysList.Sort(); //Ordenamos lista alfabeticamente.
 
             char LastFirstLetter = ' '; // Creamos variable para recoger la ultima primera letra de metodo empleada.
@@ -46,7 +46,7 @@ namespace OpenGLParser
             for (int key = 0;key<CommandsKeysList.Count;key++) //Recorremos la lista de Comandos
             {
                 //Definir Regiones Alfabeticas.
-                DataObjects.glCommand commandTemp = glReader.Commandos[CommandsKeysList[key]]; //Recuperamos el comando.
+                DataObjects.glCommand commandTemp = glReader.d_Commandos[CommandsKeysList[key]]; //Recuperamos el comando.
 
                 if (commandTemp.FromVersion.Length > 0) //Solo escribimos los que Estan en el Core de OpenGL.
                 {
@@ -71,7 +71,7 @@ namespace OpenGLParser
                         s_comentario += "Available from OpenGL version " + commandTemp.FromVersion;
                         
                     }
-                    s_comentario += commandTemp.DeprecatedVersion.Length > 0 ? " Deprecated in OpenGL version " + commandTemp.DeprecatedVersion : "";
+                    s_comentario += commandTemp.DeprecatedVersion.Length > 0 ? " | Deprecated in OpenGL version " + commandTemp.DeprecatedVersion : "";
                     s_comentario += "</sumary>";
 
                     //Ahora Escribir Método.
