@@ -47,58 +47,62 @@ namespace OpenGLParser
             {
                 //Definir Regiones Alfabeticas.
                 DataObjects.glCommand commandTemp = glReader.Commandos[CommandsKeysList[key]]; //Recuperamos el comando.
-                char ActualLetter = CommandsKeysList[key].Replace("gl", "").Substring(0,1).ToCharArray()[0];
 
-                if (ActualLetter != LastFirstLetter) //Si la nueva letra no es la ultima
+                if (commandTemp.FromVersion.Length > 0) //Solo escribimos los que Estan en el Core de OpenGL.
                 {
-                    if (LastFirstLetter != ' ') //Comprovamos que no es la primera
+                    char ActualLetter = CommandsKeysList[key].Replace("gl", "").Substring(0,1).ToCharArray()[0];
+
+                    if (ActualLetter != LastFirstLetter) //Si la nueva letra no es la ultima
                     {
-                        file.WriteLine(tab+tab+"#endregion"); //Cerramos región
+                        if (LastFirstLetter != ' ') //Comprovamos que no es la primera
+                        {
+                            file.WriteLine(tab+tab+"#endregion"); //Cerramos región
+                            file.WriteLine();
+                        }
+                        LastFirstLetter = ActualLetter; //Establecemos nueva letra
+                        file.WriteLine(tab+tab+"#region "+LastFirstLetter.ToString().ToUpper()+":"); //Abrimos región
                         file.WriteLine();
                     }
-                    LastFirstLetter = ActualLetter; //Establecemos nueva letra
-                    file.WriteLine(tab+tab+"#region "+LastFirstLetter.ToString().ToUpper()+":"); //Abrimos región
+
+                    //Escribir info de Versión.
+                    string s_comentario = tab+tab+"///<sumary> ";
+                    if (commandTemp.FromVersion.Length>0)
+                    {
+                        s_comentario += "Available from OpenGL version " + commandTemp.FromVersion;
+                        
+                    }
+                    s_comentario += commandTemp.DeprecatedVersion.Length > 0 ? " Deprecated in OpenGL version " + commandTemp.DeprecatedVersion : "";
+                    s_comentario += "</sumary>";
+
+                    //Ahora Escribir Método.
+                    string s_metodo = tab+tab+"public static "; //Iniciamos escritura del método.
+                    s_metodo += commandTemp.EsInseguro ? "unsafe " : "";
+                    s_metodo += commandTemp.ReturnedTipe+" "+CommandsKeysList[key]+"(";
+                    foreach(string keyParam in commandTemp.Parametros.Keys) //Recorremos lista deparametros para añadirlos uno a uno.
+                    {                    
+                        glParam param = commandTemp.Parametros[keyParam]; //Obtenemos el parametro.
+                        //s_metodo += param.tipo + (param.esArray? "[] ": " ") + keyParam + ", "; //Añadimos tipo, si es array y el nombre del parametro.
+                        s_metodo += param.tipo + (param.esPuntero? "* ": " ") + keyParam + ", "; //Añadimos tipo, si es puntero y el nombre del parametro.
+                    }
+                    if (commandTemp.Parametros.Count>0) {s_metodo = s_metodo.Substring(0,s_metodo.Length-2);} //Quitamos última coma y espacio si se han escrito parametros.
+                    s_metodo += ")"; //Cerramos enunciado de método.
+                    file.WriteLine(s_comentario); //Escribimos comentario de versión.
+                    file.WriteLine(s_metodo); //Escribimos enunciado de método en archivo.
+                    file.WriteLine(tab+tab+"{"); //Abrimos metodo
+
+                    //Ahora a escribir llamada.
+                    string s_llamada = ""+tab+tab+tab + ((commandTemp.ReturnedTipe != "void") ? "return " : ""); //Definimos si retorna valor.
+                    s_llamada += "internalGL."+CommandsKeysList[key]+"("; //Iniciamos escritura de la llamada a metodo interno delegado.
+                    foreach(string keyParam in commandTemp.Parametros.Keys) //Recorremos lista deparametros para añadirlos uno a uno.
+                    {
+                        s_llamada += keyParam + ", ";
+                    }
+                    if (commandTemp.Parametros.Count>0) {s_llamada = s_llamada.Substring(0,s_llamada.Length-2);} //Quitamos última coma y espacio si se han escrito parametros.
+                    s_llamada += ");";
+                    file.WriteLine(s_llamada); //Escribimos la llamada la metod interno delegado 
+                    file.WriteLine(tab+tab+"}"); //Cerramos Método
                     file.WriteLine();
                 }
-
-                //Escribir info de Versión.
-                string s_comentario = tab+tab+"///<sumary> ";
-                if (commandTemp.FromVersion.Length>0)
-                {
-                    s_comentario += "Available from OpenGL version " + commandTemp.FromVersion;
-                    
-                }
-                s_comentario += commandTemp.DeprecatedVersion.Length > 0 ? " Deprecated in OpenGL version " + commandTemp.DeprecatedVersion : "";
-                s_comentario += "</sumary>";
-
-                //Ahora Escribir Método.
-                string s_metodo = tab+tab+"public static "; //Iniciamos escritura del método.
-                s_metodo += commandTemp.EsInseguro ? "unsafe " : "";
-                s_metodo += commandTemp.ReturnedTipe+" "+CommandsKeysList[key]+"(";
-                foreach(string keyParam in commandTemp.Parametros.Keys) //Recorremos lista deparametros para añadirlos uno a uno.
-                {                    
-                    glParam param = commandTemp.Parametros[keyParam]; //Obtenemos el parametro.
-                    //s_metodo += param.tipo + (param.esArray? "[] ": " ") + keyParam + ", "; //Añadimos tipo, si es array y el nombre del parametro.
-                    s_metodo += param.tipo + (param.esPuntero? "* ": " ") + keyParam + ", "; //Añadimos tipo, si es puntero y el nombre del parametro.
-                }
-                if (commandTemp.Parametros.Count>0) {s_metodo = s_metodo.Substring(0,s_metodo.Length-2);} //Quitamos última coma y espacio si se han escrito parametros.
-                s_metodo += ")"; //Cerramos enunciado de método.
-                file.WriteLine(s_comentario); //Escribimos comentario de versión.
-                file.WriteLine(s_metodo); //Escribimos enunciado de método en archivo.
-                file.WriteLine(tab+tab+"{"); //Abrimos metodo
-
-                //Ahora a escribir llamada.
-                string s_llamada = ""+tab+tab+tab + ((commandTemp.ReturnedTipe != "void") ? "return " : ""); //Definimos si retorna valor.
-                s_llamada += "internalGL."+CommandsKeysList[key]+"("; //Iniciamos escritura de la llamada a metodo interno delegado.
-                foreach(string keyParam in commandTemp.Parametros.Keys) //Recorremos lista deparametros para añadirlos uno a uno.
-                {
-                    s_llamada += keyParam + ", ";
-                }
-                if (commandTemp.Parametros.Count>0) {s_llamada = s_llamada.Substring(0,s_llamada.Length-2);} //Quitamos última coma y espacio si se han escrito parametros.
-                s_llamada += ");";
-                file.WriteLine(s_llamada); //Escribimos la llamada la metod interno delegado 
-                file.WriteLine(tab+tab+"}"); //Cerramos Método
-                file.WriteLine();
             }
 
             file.WriteLine(tab+tab+"#endregion"); //Escribimos el último endregion.
