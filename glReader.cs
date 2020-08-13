@@ -13,6 +13,7 @@ namespace OpenGLParser
             ReadEnums(xdoc, verbose);
             ReadCommands(xdoc, verbose);
             ReadVersions(xdoc, verbose);
+            ReadExtensions(xdoc, verbose);
         }
     }
 }
