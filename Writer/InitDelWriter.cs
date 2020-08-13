@@ -42,7 +42,7 @@ namespace OpenGLParser
             file.WriteLine(tab+tab+tab+"InternalTool.GetOS();"); //Lammamos a herramienta de definición del SO actual.
 
 
-            List<string> CommandsKeysList = new List<string>(glReader.Commandos.Keys); //Creamos lista de nombres de comandos para ordenar.
+            List<string> CommandsKeysList = new List<string>(glReader.d_Commandos.Keys); //Creamos lista de nombres de comandos para ordenar.
             CommandsKeysList.Sort(); //Ordenamos lista alfabeticamente.
 
 
@@ -50,7 +50,7 @@ namespace OpenGLParser
             for (int key = 0;key<CommandsKeysList.Count;key++) //Recorremos la lista de Comandos
             {
                 //Definir Regiones Alfabeticas.
-                DataObjects.glCommand commandTemp = glReader.Commandos[CommandsKeysList[key]]; //Recuperamos el comando.
+                DataObjects.glCommand commandTemp = glReader.d_Commandos[CommandsKeysList[key]]; //Recuperamos el comando.
                 char ActualLetter = CommandsKeysList[key].Replace("gl", "").Substring(0,1).ToCharArray()[0];
 
                 if (ActualLetter != LastFirstLetter) //Si la nueva letra no es la ultima
