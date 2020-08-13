@@ -26,11 +26,11 @@ namespace OpenGLParser
                     for (int m=0;m<MetodosEnVersion.Count;m++) //Recorremos lista de metodos soportados.
                     {
                         verTemp.Metodos.Add(MetodosEnVersion[m].Attributes["name"].Value); //Añadimos metodo a la lista de soportados.
-                        if (Commandos.ContainsKey(MetodosEnVersion[m].Attributes["name"].Value)) //Comprobanmos que el método existe.
+                        if (d_Commandos.ContainsKey(MetodosEnVersion[m].Attributes["name"].Value)) //Comprobanmos que el método existe.
                         {
-                            if (Commandos[MetodosEnVersion[m].Attributes["name"].Value].FromVersion == "") //Comprovamos si ha existido antes.
+                            if (d_Commandos[MetodosEnVersion[m].Attributes["name"].Value].FromVersion == "") //Comprovamos si ha existido antes.
                             {
-                                Commandos[MetodosEnVersion[m].Attributes["name"].Value].FromVersion = s_versionNumber; //Establecemos esta versión de OpenGL como la primera
+                                d_Commandos[MetodosEnVersion[m].Attributes["name"].Value].FromVersion = s_versionNumber; //Establecemos esta versión de OpenGL como la primera
                             }
                         }
                     }
@@ -39,11 +39,11 @@ namespace OpenGLParser
                     for (int r=0;r<MetodosEliminados.Count;r++) //Recorremos lista de metodos obsoletos.
                     {
                         verTemp.Obsoletos.Add(MetodosEliminados[r].Attributes["name"].Value); //Añadimos metodo a la lista de obsoletos.
-                        if (Commandos.ContainsKey(MetodosEliminados[r].Attributes["name"].Value)) //Comprobanmos que el método existe.
+                        if (d_Commandos.ContainsKey(MetodosEliminados[r].Attributes["name"].Value)) //Comprobanmos que el método existe.
                         {
-                            if (Commandos[MetodosEliminados[r].Attributes["name"].Value].DeprecatedVersion == "") //Comprovamos si se ha depreciado anteriormente
+                            if (d_Commandos[MetodosEliminados[r].Attributes["name"].Value].DeprecatedVersion == "") //Comprovamos si se ha depreciado anteriormente
                             {
-                                Commandos[MetodosEliminados[r].Attributes["name"].Value].DeprecatedVersion = s_versionNumber; //Se marca como obsoleta a partir de esta versión.
+                                d_Commandos[MetodosEliminados[r].Attributes["name"].Value].DeprecatedVersion = s_versionNumber; //Se marca como obsoleta a partir de esta versión.
                             }
                         }
                     }
