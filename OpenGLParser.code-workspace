@@ -9,6 +9,10 @@
 		"files.exclude": 
 		{
 			"bin": true
+		},
+		"search.exclude": 
+		{
+			"bin": true
 		}
 	}
 }
