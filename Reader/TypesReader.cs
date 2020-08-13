@@ -8,12 +8,12 @@ namespace OpenGLParser
 {
     public static partial class glReader
     {
-        public static Dictionary<string, string> TiposValores; // <nombre dle tipo, tipoequivalente>
+        public static Dictionary<string, string> d_TiposValores; // <nombre dle tipo, tipoequivalente>
         public static void ReadTypes(XmlDocument xdoc, bool verbose)
         {
-            TiposValores = new Dictionary<string, string>();
-            TiposValores.Add("void ", "void"); //Añadimos Tipo Base void por defecto.
-            TiposValores.Add("void *", "IntPtr"); //Añadimos Tipo Base void * por defecto.
+            d_TiposValores = new Dictionary<string, string>();
+            d_TiposValores.Add("void ", "void"); //Añadimos Tipo Base void por defecto.
+            d_TiposValores.Add("void *", "IntPtr"); //Añadimos Tipo Base void * por defecto.
 
             if (verbose) { Console.WriteLine(); Console.WriteLine("Parsing OpenGL Types."); }
 
@@ -67,7 +67,7 @@ namespace OpenGLParser
                             }
                         }
 
-                        TiposValores.Add(v_name, v_type); // Añadimos el valor y si equivalencia;
+                        d_TiposValores.Add(v_name, v_type); // Añadimos el valor y si equivalencia;
                     }
                 }
             }
@@ -77,7 +77,7 @@ namespace OpenGLParser
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Parsed ");
                 Console.ResetColor(); 
-                Console.WriteLine(TiposValores.Count + " OpenGL Types."); 
+                Console.WriteLine(d_TiposValores.Count + " OpenGL Types."); 
             }
         }
     }

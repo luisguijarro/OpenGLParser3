@@ -27,7 +27,7 @@ namespace OpenGLParser
                     #region Obtener Valor de Retorno
                     if (commandlist[i].SelectSingleNode("proto/ptype") != null) //Si existe <ptype> se coge su valor
                     {
-                        commandTemp.ReturnedTipe = TiposValores[commandlist[i].SelectSingleNode("proto/ptype").InnerXml]; //Obtenemos el tipo de valor que retorna el método del diccionario.
+                        commandTemp.ReturnedTipe = d_TiposValores[commandlist[i].SelectSingleNode("proto/ptype").InnerXml]; //Obtenemos el tipo de valor que retorna el método del diccionario.
                     }
                     else
                     {
@@ -35,7 +35,7 @@ namespace OpenGLParser
                         //commandTemp.ReturnedTipe = TiposValores[nodetemp.InnerText].Replace(" ", "");
                         if (nodetemp.ChildNodes[0].NodeType == XmlNodeType.Text )
                         {
-                            commandTemp.ReturnedTipe = TiposValores[nodetemp.ChildNodes[0].InnerText];
+                            commandTemp.ReturnedTipe = d_TiposValores[nodetemp.ChildNodes[0].InnerText];
                         }
                     }
                     #endregion
@@ -70,7 +70,7 @@ namespace OpenGLParser
                             }
                             else
                             {
-                                s_paramType = TiposValores[s_paramType];
+                                s_paramType = d_TiposValores[s_paramType];
                             }
                         }                        
                         
