@@ -77,7 +77,7 @@ namespace OpenGLParser
                     //Ahora Escribir Método.
                     string s_metodo = tab+tab+"public static "; //Iniciamos escritura del método.
                     s_metodo += commandTemp.EsInseguro ? "unsafe " : "";
-                    s_metodo += commandTemp.ReturnedTipe+" "+CommandsKeysList[key]+"(";
+                    s_metodo += commandTemp.ReturnedType + (commandTemp.ReturnedTypePointer? "* " : " ") + CommandsKeysList[key]+"(";
                     foreach(string keyParam in commandTemp.Parametros.Keys) //Recorremos lista deparametros para añadirlos uno a uno.
                     {                    
                         glParam param = commandTemp.Parametros[keyParam]; //Obtenemos el parametro.
@@ -91,8 +91,8 @@ namespace OpenGLParser
                     file.WriteLine(tab+tab+"{"); //Abrimos metodo
 
                     //Ahora a escribir llamada.
-                    string s_llamada = ""+tab+tab+tab + ((commandTemp.ReturnedTipe != "void") ? "return " : ""); //Definimos si retorna valor.
-                    s_llamada += "internalGL."+CommandsKeysList[key]+"("; //Iniciamos escritura de la llamada a metodo interno delegado.
+                    string s_llamada = ""+tab+tab+tab + ((commandTemp.ReturnedType != "void") ? "return " : ""); //Definimos si retorna valor.
+                    s_llamada += "internalGL." + CommandsKeysList[key]+"("; //Iniciamos escritura de la llamada a metodo interno delegado.
                     foreach(string keyParam in commandTemp.Parametros.Keys) //Recorremos lista deparametros para añadirlos uno a uno.
                     {
                         s_llamada += keyParam + ", ";

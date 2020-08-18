@@ -64,8 +64,8 @@ namespace OpenGLParser
                 }
 
                 //Crear Delegados.
-                string s_delegate = tab + tab + "internal " + (commandTemp.EsInseguro? "unsafe " : "") + "delegate ";
-                s_delegate += commandTemp.ReturnedTipe + " " + CommandsKeysList[key] + "(";
+                string s_delegate = tab + tab + "internal" + (commandTemp.EsInseguro? " unsafe " : " ") + "delegate ";
+                s_delegate += commandTemp.ReturnedType + (commandTemp.ReturnedTypePointer? "* " : " ") + CommandsKeysList[key] + "(";
                 foreach(string keyParam in commandTemp.Parametros.Keys) //Recorremos lista deparametros para añadirlos uno a uno.
                 {                    
                     glParam param = commandTemp.Parametros[keyParam]; //Obtenemos el parametro.
