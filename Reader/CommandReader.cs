@@ -27,7 +27,7 @@ namespace OpenGLParser
                     #region Obtener Valor de Retorno
                     if (commandlist[i].SelectSingleNode("proto/ptype") != null) //Si existe <ptype> se coge su valor
                     {
-                        commandTemp.ReturnedTipe = d_TiposValores[commandlist[i].SelectSingleNode("proto/ptype").InnerXml]; //Obtenemos el tipo de valor que retorna el método del diccionario.
+                        commandTemp.ReturnedType = d_TiposValores[commandlist[i].SelectSingleNode("proto/ptype").InnerXml]; //Obtenemos el tipo de valor que retorna el método del diccionario.
                     }
                     else
                     {
@@ -35,9 +35,16 @@ namespace OpenGLParser
                         //commandTemp.ReturnedTipe = TiposValores[nodetemp.InnerText].Replace(" ", "");
                         if (nodetemp.ChildNodes[0].NodeType == XmlNodeType.Text )
                         {
-                            commandTemp.ReturnedTipe = d_TiposValores[nodetemp.ChildNodes[0].InnerText];
+                            commandTemp.ReturnedType = d_TiposValores[nodetemp.ChildNodes[0].InnerText]; //Obtenemos tipo de valor retornado
                         }
                     }
+
+                    if (commandlist[i].SelectSingleNode("proto").InnerText.Contains("*")) //Obtenemos si retorna puntero.
+                    {
+                            commandTemp.ReturnedTypePointer = true; 
+                            commandTemp.EsInseguro = true;  // Si el valor retornado es puntero el metodo es inseguro.
+                    }
+
                     #endregion
 
                     XmlNodeList paramList = commandlist[i].SelectNodes("param"); //Obtenemos lista d eparametros del metodo.
