@@ -44,16 +44,19 @@
     <Compile Include="DataObjects\glCommand.cs" />
     <Compile Include="DataObjects\glParam.cs" />
     <Compile Include="DataObjects\glVersion.cs" />
+    <Compile Include="DataObjects\glExtension.cs" />
     <Compile Include="Writer\EnumWriter.cs" />
     <Compile Include="Writer\CommandWriter.cs" />
     <Compile Include="Writer\DelegatesWriter.cs" />
     <Compile Include="Writer\InternalsWriter.cs" />
     <Compile Include="Writer\InternalGLToolsWriter.cs" />
     <Compile Include="Writer\InitDelWriter.cs" />
+    <Compile Include="Writer\ExtensionWriter.cs" />
     <Compile Include="Reader\EnumReader.cs" />
     <Compile Include="Reader\TypesReader.cs" />
     <Compile Include="Reader\CommandReader.cs" />
     <Compile Include="Reader\VersionReader.cs" />
+    <Compile Include="Reader\ExtensionsReader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
