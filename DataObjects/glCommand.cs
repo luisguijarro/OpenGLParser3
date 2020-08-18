@@ -5,17 +5,19 @@ namespace OpenGLParser.DataObjects
 {
     public class glCommand
     {
-        public bool EsInseguro;
+        public bool EsInseguro; // Devuelve si en algún momento delmetodo se emplean punteros.
         public string FromVersion; //Versión desde la que aparece
         public string DeprecatedVersion; //Versión en la que se marca como Obsoleto
-        public string ReturnedTipe; //Tipo de dato que retorna.
+        public string ReturnedType; //Tipo de dato que retorna.
+        public bool ReturnedTypePointer; //¿El valor retornado es Puntero?
         public Dictionary<string, glParam> Parametros; //<nombre del parametro, Parametro>,
         public glCommand()
         {
-            EsInseguro = false;
+            EsInseguro = false; // no emplea punteros por defecto.
+            ReturnedTypePointer = false; // no devuelve puntero por defecto.
             FromVersion = "";
             DeprecatedVersion = "";
-            ReturnedTipe = "void"; //void por defecto.
+            ReturnedType = "void"; //void por defecto.
             this.Parametros = new Dictionary<string, glParam>();
         }
     }
