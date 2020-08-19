@@ -55,7 +55,7 @@ namespace OpenGLParser
                     if (!d_Enumerators.ContainsKey(s_groupName)) //Comprobamos que no exista ya el Enumerador.
                     {
                         XmlNodeList groupvalues = grouplist[i].SelectNodes("enum"); //Obtenemos el listado de los nombres de los valores contenidos.
-                        if (groupvalues.Count > 0) //Comprobamos que tenga alguno. No siempre es así y no tiene sentido un grupo vacio.
+                        if (groupvalues.Count > 0) //Comprobamos que tenga alguno. No siempre es así.
                         {
                             glEnum tempgroup = new glEnum(); //Creamos el enumerador correspondiente al grupo.
                             for (int a = 0; a < groupvalues.Count; a++) //Recorremos la lista de nombres de valores.
@@ -87,6 +87,23 @@ namespace OpenGLParser
                                 Console.Write(new String(' ', Console.BufferWidth)); //Limpiamos linea a sobreescribir.
                                 Console.SetCursorPosition(0,ctop);
                                 Console.Write("    - Enums Parsed "+d_Enumerators.Count.ToString("D3")+": "+s_groupName);
+                            }
+                        }
+                        else // Si no tiene ningún valor el grupo
+                        {
+                            foreach (string key in d_Valores.Keys) //Repasamos el total d elos valores
+                            {
+                                if (s_groupName == d_Valores[key].Group) // Si el valor tiene atributo de grupo igual al grupo vacio
+                                {
+                                    if (!d_Enumerators.ContainsKey(s_groupName)) // Comprovamos si existe grupo
+                                    {
+                                        d_Enumerators.Add(s_groupName, new glEnum()); //Creamos grupo si no existe.
+                                    }
+                                    if (!d_Enumerators[s_groupName].EnumValues.ContainsKey(key)) // Comprobamos si el grupo tiene ya el valor.
+                                    {
+                                        d_Enumerators[s_groupName].EnumValues.Add(key, d_Valores[key]); //Añadimos el valor si el grupo no lo tiene.
+                                    }
+                                }
                             }
                         }
                     }
