@@ -25,6 +25,7 @@ namespace OpenGLParser
                     glCommand commandTemp = new glCommand(); //Declaracion de comando temporal.
                     
                     #region Obtener Valor de Retorno
+
                     if (commandlist[i].SelectSingleNode("proto/ptype") != null) //Si existe <ptype> se coge su valor
                     {
                         commandTemp.ReturnedType = d_TiposValores[commandlist[i].SelectSingleNode("proto/ptype").InnerXml]; //Obtenemos el tipo de valor que retorna el método del diccionario.
@@ -47,7 +48,7 @@ namespace OpenGLParser
 
                     #endregion
 
-                    XmlNodeList paramList = commandlist[i].SelectNodes("param"); //Obtenemos lista d eparametros del metodo.
+                    XmlNodeList paramList = commandlist[i].SelectNodes("param"); //Obtenemos lista de parametros del metodo.
                     for (int p=0;p<paramList.Count;p++)
                     {
                         glParam paramtemp = new glParam();
@@ -64,11 +65,32 @@ namespace OpenGLParser
                             paramtemp.esPuntero = paramList[p].InnerText.Contains("*"); //Si tiene asterisco es un puntero.
                             commandTemp.EsInseguro = paramtemp.esPuntero ? true : commandTemp.EsInseguro; //Indicamos si el método es inseguro o se queda como estaba.
                             s_paramType = paramList[p].SelectSingleNode("ptype").InnerText; //Obtenemos tipo del parametro.
+
+                            if (paramList[p].Attributes["group"] != null)
+                            {
+                                string s_group = paramList[p].Attributes["group"].Value; //Obtenemos nombre del enumerador.
+                                if (d_Enumerators.ContainsKey(s_group))
+                                {
+                                    s_paramType = s_group;
+                                }
+                                else
+                                {
+                                    if (s_paramType == "GLenum") //Si es un enumerador 
+                                    {
+                                        s_paramType = "uint";
+                                    }
+                                    else
+                                    {
+                                        s_paramType = d_TiposValores[s_paramType];
+                                    }
+                                }
+                            }
+                            /*
                             if (s_paramType == "GLenum") //Si es un enumerador 
                             {
                                 if (paramList[p].Attributes["group"] != null)
                                 {
-                                    s_paramType = paramList[p].Attributes["group"].Value; //Obtenemos nombre dle enumerador.
+                                    s_paramType = paramList[p].Attributes["group"].Value; //Obtenemos nombre del enumerador.
                                 }
                                 else
                                 {
@@ -79,6 +101,7 @@ namespace OpenGLParser
                             {
                                 s_paramType = d_TiposValores[s_paramType];
                             }
+                            */
                         }                        
                         
                         paramtemp.tipo = s_paramType;
