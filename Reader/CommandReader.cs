@@ -65,23 +65,20 @@ namespace OpenGLParser
                             paramtemp.esPuntero = paramList[p].InnerText.Contains("*"); //Si tiene asterisco es un puntero.
                             commandTemp.EsInseguro = paramtemp.esPuntero ? true : commandTemp.EsInseguro; //Indicamos si el método es inseguro o se queda como estaba.
                             s_paramType = paramList[p].SelectSingleNode("ptype").InnerText; //Obtenemos tipo del parametro.
+                            s_paramType = d_TiposValores[s_paramType]; //Obtenemos el tipo
 
-                            if (paramList[p].Attributes["group"] != null)
+                            if (paramList[p].Attributes["group"] != null) // Si hay grupo...
                             {
                                 string s_group = paramList[p].Attributes["group"].Value; //Obtenemos nombre del enumerador.
-                                if (d_Enumerators.ContainsKey(s_group))
+                                if (d_Enumerators.ContainsKey(s_group)) // Si el enumerador existe...
                                 {
-                                    s_paramType = s_group;
+                                    s_paramType = s_group; // Tipo de valor es el enumerador.
                                 }
-                                else
+                                else // Si no existe enumerador
                                 {
-                                    if (s_paramType == "GLenum") //Si es un enumerador 
+                                    if (s_paramType == "GLenum") //... y el tipo es GLenum ...
                                     {
-                                        s_paramType = "uint";
-                                    }
-                                    else
-                                    {
-                                        s_paramType = d_TiposValores[s_paramType];
+                                        s_paramType = "uint"; // ... El valor es uint.
                                     }
                                 }
                             }
