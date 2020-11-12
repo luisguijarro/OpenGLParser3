@@ -9,7 +9,7 @@ namespace OpenGLParser
     public static partial class glReader
     {
         public static Dictionary<string, glEnum> d_Enumerators; //Nombre del enumerador, Enumerador.
-        private static Dictionary<string,glEnumValue> d_Valores; //Almacena todos los valores. <nombre,valor>
+        public static Dictionary<string,glEnumValue> d_Valores; //Almacena todos los valores. <nombre,valor>
         private static void ReadEnums(XmlDocument xdoc, bool verbose)
         {
             d_Enumerators = new Dictionary<string, glEnum>();
