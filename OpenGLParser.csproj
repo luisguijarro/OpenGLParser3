@@ -57,6 +57,8 @@
     <Compile Include="Reader\CommandReader.cs" />
     <Compile Include="Reader\VersionReader.cs" />
     <Compile Include="Reader\ExtensionsReader.cs" />
+    <Compile Include="DocuParse\DocuParser.cs" />
+    <Compile Include="DocuParse\DocuEnumComplete.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
