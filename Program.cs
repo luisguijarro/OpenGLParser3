@@ -7,6 +7,7 @@ namespace OpenGLParser
         static bool verbose;
         static bool download;
         static bool downloaded;
+        static bool gitRefPages;
         static bool ayuda;
         static string output;
         static string s_namespace;
@@ -32,6 +33,12 @@ namespace OpenGLParser
                         break;
                     case "-D":
                         download = true;
+                        break;
+                    case "-g":
+                        gitRefPages = true;
+                        break;
+                    case "-G":
+                        gitRefPages = true;
                         break;
                     case "-o":
                         output = args[i + 1];
@@ -66,7 +73,7 @@ namespace OpenGLParser
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("OpenGL Parser 3");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("========================================================");
+            Console.WriteLine("==========================================================");
             Console.ResetColor();
 
             if (download)
@@ -98,7 +105,7 @@ namespace OpenGLParser
             }
 
             //Parsear;
-            glParser.Parse("./gl.xml", s_namespace, output, verbose);
+            glParser.Parse("./gl.xml", s_namespace, output, verbose, gitRefPages);
             Console.WriteLine();
         }
 
@@ -107,7 +114,7 @@ namespace OpenGLParser
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("OpenGL Parser 3 Help Output:");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("========================================================");
+            Console.WriteLine("==========================================================");
             Console.ResetColor();
             Console.WriteLine("oglp3 [OPTION] <option value>");
             Console.WriteLine("Options:");
@@ -116,6 +123,7 @@ namespace OpenGLParser
             Console.WriteLine("         If gl.xml file dont exist -d is by default.");
             Console.WriteLine("  -o  -> Output Path of .cs Files. (./output/ by default)");
             Console.WriteLine("  -n  -> NameSpace of .cs Files. (OpenGL by default)");
+            Console.WriteLine("  -g  -> Complete Enums with OpenGL-RefPages. requires git.");
             Console.WriteLine("  -h  -> Show this Help. Ignore another options.");
         }
 
@@ -187,6 +195,7 @@ namespace OpenGLParser
             {
                 Console.WriteLine();
                 Console.WriteLine("Error en descarga de gl.xml");
+                return;
             }
             if ((e.Error == null) && (!e.Cancelled))
             {
