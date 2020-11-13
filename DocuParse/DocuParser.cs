@@ -91,15 +91,15 @@ namespace OpenGLParser
             return Parse("./OpenGL-Refpages/gl4/");
         }
 
-        public static bool Parse(string s_URL) //Devuelve False si hay algún fallo.
+        public static bool Parse(string s_Path) //Devuelve False si hay algún fallo.
         {
             if (d_MethodParamValues == null) { d_MethodParamValues = new Dictionary<string, Dictionary<string, List<string>>>();}
-            if (!Directory.Exists(s_URL))
+            if (!Directory.Exists(s_Path))
             {
                 Console.WriteLine("OpenGL-Refpages repository is not cloned");
                 return false;
             }
-            string[] Filenames = Directory.GetFiles(s_URL, "gl*.xml"); //Obtener ficheros xml.
+            string[] Filenames = Directory.GetFiles(s_Path, "gl*.xml"); //Obtener ficheros xml.
 
             foreach (string filename in Filenames)
             {
