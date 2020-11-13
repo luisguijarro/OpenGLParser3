@@ -86,6 +86,9 @@ namespace OpenGLParser
             return Parse("./OpenGL-Refpages/gl2.1/");
         }
 
+        ///<sumary>
+        ///Parsear documentación OpenGL 4
+        ///</sumary>
         public static bool Parse4() //Devuelve False si hay algún fallo.
         {
             return Parse("./OpenGL-Refpages/gl4/");
