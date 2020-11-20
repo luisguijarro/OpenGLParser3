@@ -65,6 +65,21 @@ namespace OpenGLParser
                             if (paramList[p].InnerText.Contains("*")) //Si tiene asterisco es un puntero.)
                             {
                                 paramtemp.esPuntero = paramList[p].InnerText.Split('*').Length-1;
+                                if (paramList[p].InnerText.Contains("const")) // Si es Constante es In.
+                                { 
+                                    paramtemp.Acces = AccesParam.In;
+                                } 
+                                else
+                                {
+                                    if (s_ParamName.Contains("get")) // Si es un método de obtención, damos por hecho que es OUT si no tiene const.
+                                    {
+                                        paramtemp.Acces = AccesParam.Out;
+                                    }
+                                    else
+                                    {
+                                        // De momento la ultima excepcion la dejamos como indeterminado ante el desconocimiento.
+                                    }
+                                }
                             }
                             commandTemp.EsInseguro = (paramtemp.esPuntero>0) ? true : commandTemp.EsInseguro; //Indicamos si el método es inseguro o se queda como estaba.
                             s_paramType = paramList[p].SelectSingleNode("ptype").InnerText; //Obtenemos tipo del parametro.
@@ -85,23 +100,6 @@ namespace OpenGLParser
                                     }
                                 }
                             }
-                            /*
-                            if (s_paramType == "GLenum") //Si es un enumerador 
-                            {
-                                if (paramList[p].Attributes["group"] != null)
-                                {
-                                    s_paramType = paramList[p].Attributes["group"].Value; //Obtenemos nombre del enumerador.
-                                }
-                                else
-                                {
-                                    s_paramType = "uint";
-                                }
-                            }
-                            else
-                            {
-                                s_paramType = d_TiposValores[s_paramType];
-                            }
-                            */
                         }                        
                         
                         paramtemp.tipo = s_paramType;
