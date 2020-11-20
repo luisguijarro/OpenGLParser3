@@ -5,7 +5,6 @@ namespace OpenGLParser.DataObjects
 {
     public class glCommand
     {
-        public AccesParam Acces;
         public bool EsInseguro; // Devuelve si en algún momento delmetodo se emplean punteros.
         public string FromVersion; //Versión desde la que aparece
         public string DeprecatedVersion; //Versión en la que se marca como Obsoleto
@@ -14,7 +13,6 @@ namespace OpenGLParser.DataObjects
         public Dictionary<string, glParam> Parametros; //<nombre del parametro, Parametro>,
         public glCommand()
         {
-            Acces = AccesParam.Unknown;
             EsInseguro = false; // no emplea punteros por defecto.
             ReturnedTypePointer = false; // no devuelve puntero por defecto.
             FromVersion = "";
@@ -24,8 +22,4 @@ namespace OpenGLParser.DataObjects
         }
     }
 
-    public enum AccesParam
-    {
-        Unknown = 0, In, Out, Ref
-    }
 }
