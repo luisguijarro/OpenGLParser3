@@ -64,14 +64,29 @@ namespace OpenGLParser
                             glParam param = commandTemp.Parametros[keyParam]; //Obtenemos el parametro.
                             //s_metodo += param.tipo + (param.esArray? "[] ": " ") + keyParam + ", "; //Añadimos tipo, si es array y el nombre del parametro.
                             string s_ptn = "";
+                            string s_tipo = param.tipo;
                             if (param.esPuntero>0)
-                            {                            
-                                for (int ptn=0;ptn<param.esPuntero;ptn++)
+                            {
+                                if (s_tipo == "char")
                                 {
-                                    s_ptn += "*";
-                                }                            
+                                    if (param.Acces == AccesParam.In)
+                                    {
+                                        s_tipo = "[MarshalAs(UnmanagedType.LPStr)] string" + ((param.esPuntero>1) ? "[]" : "");
+                                    }
+                                    else
+                                    {
+                                        s_tipo = "StringBuilder" + ((param.esPuntero>1) ? "[]" : "");
+                                    }
+                                }
+                                else
+                                {
+                                    for (int ptn=0;ptn<param.esPuntero;ptn++)
+                                    {
+                                        s_ptn += "*";
+                                    }  
+                                }                          
                             }
-                            s_metodo += param.tipo + s_ptn + " " + keyParam + ", ";
+                            s_metodo += s_tipo + s_ptn + " " + keyParam + ", ";
                             
                             //s_metodo += param.tipo + (param.esPuntero? "* ": " ") + keyParam + ", "; //Añadimos tipo, si es puntero y el nombre del parametro.
                         }
