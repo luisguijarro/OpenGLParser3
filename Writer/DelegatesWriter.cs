@@ -29,6 +29,8 @@ namespace OpenGLParser
             file.WriteLine();
 
             file.WriteLine("using System;");
+            file.WriteLine("using System.Text;");
+            file.WriteLine("using System.Runtime.InteropServices;");
             file.WriteLine();
             file.WriteLine("namespace " + NameSpace + ".OpenGL");
             file.WriteLine("{");
