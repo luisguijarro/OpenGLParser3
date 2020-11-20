@@ -62,6 +62,10 @@ namespace OpenGLParser
                                     else
                                     {
                                         v_type = Tools.GetTypeFromGLType(typeslist[i].InnerText); //Obtenemos el tipo de valor.
+                                        
+                                        //Console.WriteLine("type"+typeslist[i].InnerText);
+                                        //Console.WriteLine("    -"+v_type);
+                                        
                                     }
                                 }
                             }

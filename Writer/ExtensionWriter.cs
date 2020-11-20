@@ -63,8 +63,19 @@ namespace OpenGLParser
                         {                    
                             glParam param = commandTemp.Parametros[keyParam]; //Obtenemos el parametro.
                             //s_metodo += param.tipo + (param.esArray? "[] ": " ") + keyParam + ", "; //Añadimos tipo, si es array y el nombre del parametro.
-                            s_metodo += param.tipo + (param.esPuntero? "* ": " ") + keyParam + ", "; //Añadimos tipo, si es puntero y el nombre del parametro.
+                            string s_ptn = "";
+                            if (param.esPuntero>0)
+                            {                            
+                                for (int ptn=0;ptn<param.esPuntero;ptn++)
+                                {
+                                    s_ptn += "*";
+                                }                            
+                            }
+                            s_metodo += param.tipo + s_ptn + " " + keyParam + ", ";
+                            
+                            //s_metodo += param.tipo + (param.esPuntero? "* ": " ") + keyParam + ", "; //Añadimos tipo, si es puntero y el nombre del parametro.
                         }
+                        
                         if (commandTemp.Parametros.Count>0) {s_metodo = s_metodo.Substring(0,s_metodo.Length-2);} //Quitamos última coma y espacio si se han escrito parametros.
                         s_metodo += ")"; //Cerramos enunciado de método.
                         

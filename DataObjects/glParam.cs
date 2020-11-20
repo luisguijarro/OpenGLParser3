@@ -8,7 +8,7 @@ namespace OpenGLParser.DataObjects
         public string tipo;
         // public int len; //Si es un Array tiene 0 o más
         public bool esArray;
-        public bool esPuntero;
+        public int esPuntero; //cambiamos bool por int para contar el numero de *
         public glParam()
         {
             tipo = "";

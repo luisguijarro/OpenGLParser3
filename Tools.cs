@@ -146,7 +146,7 @@ namespace OpenGLParser
             }
             if (tipo.Contains(" char"))
             {
-                return b_unsigned ? "byte": "sbyte";
+                return b_unsigned ? "byte": "char"; //"sbyte";
             }
             
             if (tipo.Contains("_int8"))

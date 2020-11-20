@@ -62,8 +62,11 @@ namespace OpenGLParser
                         }
                         else
                         {
-                            paramtemp.esPuntero = paramList[p].InnerText.Contains("*"); //Si tiene asterisco es un puntero.
-                            commandTemp.EsInseguro = paramtemp.esPuntero ? true : commandTemp.EsInseguro; //Indicamos si el método es inseguro o se queda como estaba.
+                            if (paramList[p].InnerText.Contains("*")) //Si tiene asterisco es un puntero.)
+                            {
+                                paramtemp.esPuntero = paramList[p].InnerText.Split('*').Length-1;
+                            }
+                            commandTemp.EsInseguro = (paramtemp.esPuntero>0) ? true : commandTemp.EsInseguro; //Indicamos si el método es inseguro o se queda como estaba.
                             s_paramType = paramList[p].SelectSingleNode("ptype").InnerText; //Obtenemos tipo del parametro.
                             s_paramType = d_TiposValores[s_paramType]; //Obtenemos el tipo
 
