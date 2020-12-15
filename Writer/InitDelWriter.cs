@@ -51,25 +51,29 @@ namespace OpenGLParser
             {
                 //Definir Regiones Alfabeticas.
                 DataObjects.glCommand commandTemp = glReader.d_Commandos[CommandsKeysList[key]]; //Recuperamos el comando.
-                char ActualLetter = CommandsKeysList[key].Replace("gl", "").Substring(0,1).ToCharArray()[0];
 
-                if (ActualLetter != LastFirstLetter) //Si la nueva letra no es la ultima
+                if (commandTemp.FromVersion.Length > 0) //Solo escribimos los que Estan en el Core de OpenGL.
                 {
-                    if (LastFirstLetter != ' ') //Comprovamos que no es la primera
+                    char ActualLetter = CommandsKeysList[key].Replace("gl", "").Substring(0,1).ToCharArray()[0];
+
+                    if (ActualLetter != LastFirstLetter) //Si la nueva letra no es la ultima
                     {
-                        file.WriteLine(tab+tab+tab+"#endregion"); //Cerramos región
+                        if (LastFirstLetter != ' ') //Comprovamos que no es la primera
+                        {
+                            file.WriteLine(tab+tab+tab+"#endregion"); //Cerramos región
+                            file.WriteLine();
+                        }
+                        LastFirstLetter = ActualLetter; //Establecemos nueva letra
+                        file.WriteLine(tab+tab+tab+"#region "+LastFirstLetter.ToString().ToUpper()+":"); //Abrimos región
                         file.WriteLine();
                     }
-                    LastFirstLetter = ActualLetter; //Establecemos nueva letra
-                    file.WriteLine(tab+tab+tab+"#region "+LastFirstLetter.ToString().ToUpper()+":"); //Abrimos región
-                    file.WriteLine();
-                }
 
-                string s_initDel = tab + tab + tab + NameSpace + ".OpenGL.internalGL." + CommandsKeysList[key] + " = ";
-                s_initDel += "(" + NameSpace + ".OpenGL.delegatesGL." + CommandsKeysList[key] + ") ";
-                s_initDel += "InternalTool.GetGLMethodAdress(\""+ CommandsKeysList[key] + "\", typeof("+ NameSpace + ".OpenGL.delegatesGL." + CommandsKeysList[key] + "));";
-                file.WriteLine(s_initDel); //Escribimos iniciación de Metodo de OpenGL
-                //file.WriteLine();
+                    string s_initDel = tab + tab + tab + NameSpace + ".OpenGL.internalGL." + CommandsKeysList[key] + " = ";
+                    s_initDel += "(" + NameSpace + ".OpenGL.delegatesGL." + CommandsKeysList[key] + ") ";
+                    s_initDel += "InternalTool.GetGLMethodAdress(\""+ CommandsKeysList[key] + "\", typeof("+ NameSpace + ".OpenGL.delegatesGL." + CommandsKeysList[key] + "));";
+                    file.WriteLine(s_initDel); //Escribimos iniciación de Metodo de OpenGL
+                    //file.WriteLine();
+                }
             }
 
             file.WriteLine(tab+tab+tab+"#endregion"); //Escribimos el último endregion.
