@@ -35,7 +35,7 @@ namespace OpenGLParser
 
             string tab = "\t"; //Definimos tabulación.
 
-            file.WriteLine(tab+"internal static class DelegastesInitGL"); //Declaramos Clase Estatica contenedora de los métodos.
+            file.WriteLine(tab+"internal static partial class DelegastesInitGL"); //Declaramos Clase Estatica contenedora de los métodos.
             file.WriteLine(tab+"{"); //Abrimos clase 
             file.WriteLine(tab+tab+"internal static void InitDelegates()"); //Declaramos Metodo Estatico Iniciador de Delegados..
             file.WriteLine(tab+tab+"{"); //Abrimos Metodo 
