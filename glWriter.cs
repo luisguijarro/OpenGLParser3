@@ -12,6 +12,7 @@ namespace OpenGLParser
             WriteDelegates(NameSpace, outpath, verbose);
             WriteInternalTools(NameSpace, outpath, verbose);
             WriteDelegateInitializer(NameSpace, outpath, verbose);
+            WriteDelegateInitializerEXT(NameSpace, outpath, verbose);
             WriteCommands(NameSpace, outpath, verbose);
             WriteEXTCommands(NameSpace, outpath, verbose);
         }
