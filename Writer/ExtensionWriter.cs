@@ -73,7 +73,8 @@ namespace OpenGLParser
                                 {
                                     if (param.Acces == AccesParam.In)
                                     {
-                                        s_tipo = "[MarshalAs(UnmanagedType.LPStr)] string" + ((param.esPuntero>1) ? "[]" : "");
+                                        //s_tipo = "[MarshalAs(UnmanagedType.LPStr)] string" + ((param.esPuntero>1) ? "[]" : "");
+                                        s_tipo = "string" + ((param.esPuntero>1) ? "[]" : "");
                                     }
                                     else
                                     {
