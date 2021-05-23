@@ -64,7 +64,17 @@ namespace OpenGLParser
             file.WriteLine();
             file.WriteLine(tab + tab + tab + "if (p_ret != IntPtr.Zero)");
             file.WriteLine(tab + tab + tab + "{");
-            file.WriteLine(tab + tab + tab + tab + "return Marshal.GetDelegateForFunctionPointer(p_ret, type_origen);");
+            file.WriteLine(tab + tab + tab + tab + "try");
+            file.WriteLine(tab + tab + tab + tab + "{");
+            file.WriteLine(tab + tab + tab + tab + tab + "return Marshal.GetDelegateForFunctionPointer(p_ret, type_origen);");
+            file.WriteLine(tab + tab + tab + tab + "}");
+            file.WriteLine(tab + tab + tab + tab + "catch");
+            file.WriteLine(tab + tab + tab + tab + "{");
+            file.WriteLine(tab + tab + tab + tab + tab + "#if DEBUG");
+            file.WriteLine(tab + tab + tab + tab + tab + "Console.WriteLine(type_origen.ToString());");
+            file.WriteLine(tab + tab + tab + tab + tab + "#endif");
+            file.WriteLine(tab + tab + tab + tab + tab + "return null;");
+            file.WriteLine(tab + tab + tab + tab + "}");
             file.WriteLine(tab + tab + tab + "}");
             file.WriteLine(tab + tab + tab + "else");
             file.WriteLine(tab + tab + tab + "{");
