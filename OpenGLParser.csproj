@@ -1,65 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{81252E36-2C22-43BF-92D2-F54A161AA668}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>OpenGLParser</RootNamespace>
-    <AssemblyName>oglp3</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ExternalConsole>true</ExternalConsole>
-    <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ExternalConsole>true</ExternalConsole>
-    <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Program.cs" />
-    <Compile Include="glParser.cs" />
-    <Compile Include="glReader.cs" />
-    <Compile Include="glWriter.cs" />
-    <Compile Include="Tools.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataObjects\glEnum.cs" />
-    <Compile Include="DataObjects\glEnumValue.cs" />
-    <Compile Include="DataObjects\glCommand.cs" />
-    <Compile Include="DataObjects\glParam.cs" />
-    <Compile Include="DataObjects\glVersion.cs" />
-    <Compile Include="DataObjects\glExtension.cs" />
-    <Compile Include="Writer\EnumWriter.cs" />
-    <Compile Include="Writer\CommandWriter.cs" />
-    <Compile Include="Writer\DelegatesWriter.cs" />
-    <Compile Include="Writer\InternalsWriter.cs" />
-    <Compile Include="Writer\InternalGLToolsWriter.cs" />
-    <Compile Include="Writer\InitDelWriter.cs" />
-    <Compile Include="Writer\InitDelWriterExts.cs" />
-    <Compile Include="Writer\ExtensionWriter.cs" />
-    <Compile Include="Reader\EnumReader.cs" />
-    <Compile Include="Reader\TypesReader.cs" />
-    <Compile Include="Reader\CommandReader.cs" />
-    <Compile Include="Reader\VersionReader.cs" />
-    <Compile Include="Reader\ExtensionsReader.cs" />
-    <Compile Include="DocuParse\DocuParser.cs" />
-    <Compile Include="DocuParse\DocuEnumComplete.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+
 </Project>
