@@ -6,13 +6,14 @@ namespace OpenGLParser
     public static partial class glReader
     {
         //private XmlDocument xdoc;
-        public static void Parse(XmlDocument xdoc, bool verbose)
+        public static void Parse(XmlDocument xdoc, bool verbose, bool ogles)
         {
             //this.xdoc = xmlDocument;
             ReadTypes(xdoc, verbose);
             ReadEnums(xdoc, verbose);
             ReadCommands(xdoc, verbose);
             ReadVersions(xdoc, verbose);
+            if (ogles) { ReadGlesVersions(xdoc, verbose); }
             ReadExtensions(xdoc, verbose);
         }
     }
