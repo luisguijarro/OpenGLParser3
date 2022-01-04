@@ -1,8 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-
+  <ItemGroup>
+    <Content Include="Program.cs" />
+    <Content Include="Tools.cs" />
+    <Content Include="glWriter.cs" />
+    <Content Include="glReader.cs" />
+    <Content Include="glParser.cs" />
+    <Content Include="Writer\InternalsWriter.cs" />
+    <Content Include="Writer\InternalGLToolsWriter.cs" />
+    <Content Include="Writer\InitDelWriterExts.cs" />
+    <Content Include="Writer\InitDelWriter.cs" />
+    <Content Include="Writer\ExtensionWriter.cs" />
+    <Content Include="Writer\EnumWriter.cs" />
+    <Content Include="Writer\DelegatesWriter.cs" />
+    <Content Include="Writer\CommandWriter.cs" />
+    <Content Include="Reader\VersionReader.cs" />
+    <Content Include="Reader\TypesReader.cs" />
+    <Content Include="Reader\ExtensionsReader.cs" />
+    <Content Include="Reader\EnumReader.cs" />
+    <Content Include="Reader\CommandReader.cs" />
+    <Content Include="DocuParse\DocuParser.cs" />
+    <Content Include="DocuParse\DocuEnumComplete.cs" />
+    <Content Include="DataObjects\glVersion.cs" />
+    <Content Include="DataObjects\glParam.cs" />
+    <Content Include="DataObjects\glExtension.cs" />
+    <Content Include="DataObjects\glEnumValue.cs" />
+    <Content Include="DataObjects\glEnum.cs" />
+    <Content Include="DataObjects\glCommand.cs" />
+  </ItemGroup>
 </Project>
