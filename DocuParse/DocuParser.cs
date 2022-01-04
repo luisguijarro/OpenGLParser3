@@ -61,7 +61,7 @@ namespace OpenGLParser
                 {
                     StartInfo = new ProcessStartInfo
                     {
-                        FileName = "/bin/git",
+                        FileName = "/usr/bin/git",
                         Arguments = "clone https://github.com/KhronosGroup/OpenGL-Refpages.git",
                         UseShellExecute = false, 
                         RedirectStandardOutput = true,
