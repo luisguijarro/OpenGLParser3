@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using System.ComponentModel;
 
 namespace OpenGLParser
 {
@@ -8,6 +10,7 @@ namespace OpenGLParser
         static bool download;
         static bool downloaded;
         static bool gitRefPages;
+        static bool withgles;
         static bool ayuda;
         static string output;
         static string s_namespace;
@@ -15,6 +18,7 @@ namespace OpenGLParser
         static bool textoprocesado;
         public static void Main(string[] args)
         {
+            Console.Clear();
             output = "./output/";
             s_namespace = "OpenGL";
             for (int i = 0; i < args.Length; i++)
@@ -23,42 +27,34 @@ namespace OpenGLParser
                 switch (arg)
                 {
                     case "-v":
-                        verbose = true;
-                        break;
                     case "-V":
                         verbose = true;
                         break;
                     case "-d":
-                        download = true;
-                        break;
                     case "-D":
                         download = true;
                         break;
                     case "-g":
-                        gitRefPages = true;
-                        break;
                     case "-G":
                         gitRefPages = true;
                         break;
-                    case "-o":
-                        output = args[i + 1];
-                        i++;
+                    case "-es":
+                    case "-Es":
+                    case "-eS":
+                    case "-ES":
+                        withgles = true;
                         break;
+                    case "-o":
                     case "-O":
                         output = args[i + 1];
                         i++;
                         break;
                     case "-n":
-                        s_namespace = args[i + 1];
-                        i++;
-                        break;
                     case "-N":
                         s_namespace = args[i + 1];
                         i++;
                         break;
                     case "-h":
-                        ayuda = true;
-                        break;
                     case "--help":
                         ayuda = true;
                         break;
@@ -101,11 +97,12 @@ namespace OpenGLParser
                 while(!downloaded)
                 {
                     //Esperar a que termine la descarga.
+                    System.Threading.Thread.Sleep(100); //Aligerar consumo de recursos.
                 }        
             }
 
             //Parsear;
-            glParser.Parse("./gl.xml", s_namespace, output, verbose, gitRefPages);
+            glParser.Parse("./gl.xml", s_namespace, output.Length > 0 ? output+"/" : output, verbose, gitRefPages, withgles);
             Console.WriteLine();
         }
 
@@ -124,6 +121,7 @@ namespace OpenGLParser
             Console.WriteLine("  -o  -> Output Path of .cs Files. (./output/ by default)");
             Console.WriteLine("  -n  -> NameSpace of .cs Files. (OpenGL by default)");
             Console.WriteLine("  -g  -> Complete Enums with OpenGL-RefPages. requires git.");
+            Console.WriteLine("  -es -> Parse with OpenGL|ES");
             Console.WriteLine("  -h  -> Show this Help. Ignore another options.");
         }
 
@@ -131,8 +129,10 @@ namespace OpenGLParser
         {
             using (System.Net.WebClient wc = new System.Net.WebClient())
             {
-                wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
-                wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
+                wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(Wc_DownloadProgressChanged);
+                wc.DownloadFileCompleted += new AsyncCompletedEventHandler(Wc_DownloadFileCompleted);
+                wc.BaseAddress = "";
+                wc.Headers.Add("User-Agent", "Mozilla/4.0 (compatible; MSIE 8.0)");
                 wc.Proxy = System.Net.WebRequest.GetSystemWebProxy();
                 wc.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
 
@@ -142,11 +142,18 @@ namespace OpenGLParser
                 Console.WriteLine("Descargando gl.xml desde repositorio oficial.");
                 cursortop = Console.CursorTop;
                 textoprocesado = true;
-                wc.DownloadFileAsync(uri, "./gl.xml.temp");
+                try
+                {
+                    wc.DownloadFileAsync(uri, "./gl.xml.temp");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("EXCEPTION: "+e.Message);
+                }
             }
         }
 
-        static void Wc_DownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
+        static void Wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             if (textoprocesado) //Solo se procesa la escritura de texto si la anterior se ha terminado.
             {
@@ -184,7 +191,7 @@ namespace OpenGLParser
             }
         }
 
-        static void Wc_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        static void Wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (e.Cancelled)
             {
