@@ -13,8 +13,10 @@ namespace OpenGLParser
             ReadEnums(xdoc, verbose);
             ReadCommands(xdoc, verbose);
             ReadVersions(xdoc, verbose);
-            if (ogles) { ReadGlesVersions(xdoc, verbose); }
             ReadExtensions(xdoc, verbose);
+
+            if (ogles) { ReadGlesVersions(xdoc, verbose); }
+            if (ogles) { ReadGlesExtensions(xdoc, verbose); }
         }
     }
 }
