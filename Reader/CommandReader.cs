@@ -48,6 +48,8 @@ namespace OpenGLParser
 
                     #endregion
 
+                    #region Obtener Parametrosl Metodo.
+                    
                     XmlNodeList paramList = commandlist[i].SelectNodes("param"); //Obtenemos lista de parametros del metodo.
                     for (int p=0;p<paramList.Count;p++)
                     {
@@ -109,6 +111,7 @@ namespace OpenGLParser
                         commandTemp.Parametros.Add(Tools.FixedParamName(s_ParamName), paramtemp); //Añadimos parametro con Corrección de nombre.
                     }
 
+                    #endregion
 
                     d_Commandos.Add(commandName, commandTemp); //Añadir commanods al diccionario.
                 }
