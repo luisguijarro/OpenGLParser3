@@ -31,5 +31,6 @@
     <Content Include="DataObjects\glEnumValue.cs" />
     <Content Include="DataObjects\glEnum.cs" />
     <Content Include="DataObjects\glCommand.cs" />
+    <Content Include="Writer\gles\GlesCommandsWriter.cs" />
   </ItemGroup>
 </Project>
