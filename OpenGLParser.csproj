@@ -32,5 +32,10 @@
     <Content Include="DataObjects\glEnum.cs" />
     <Content Include="DataObjects\glCommand.cs" />
     <Content Include="Writer\gles\GlesCommandsWriter.cs" />
+    <Content Include="Writer\gles\GlesDelegatesWriter.cs" />
+    <Content Include="Writer\gles\GlesInternalsWriter.cs" />
+    <Content Include="Writer\gles\InternalGLesToolsWriter.cs" />
+    <Content Include="Writer\gles\GlesExtensionsWriter.cs" />
+    <Content Include="Writer\gles\GlesInitDelWriterExts.cs" />
   </ItemGroup>
 </Project>
