@@ -65,7 +65,7 @@ namespace OpenGLParser
             d_Gles_Extensions = new Dictionary<string, glExtension>();
             if (verbose) { Console.WriteLine(); Console.WriteLine("Parsing OpenGL|ES Extensions."); }
 
-            XmlNodeList extensionlist = xdoc.SelectNodes("registry/extensions/extension[Contains(@supported,'gles')]"); //Obtenemos lista de Extensiones de OpenGL|ES
+            XmlNodeList extensionlist = xdoc.SelectNodes("registry/extensions/extension[contains(@supported,'gles')]"); //Obtenemos lista de Extensiones de OpenGL|ES
             if (extensionlist.Count > 0) //Comprobamos que se obtienen resultados.
             {
                 for (int i = 0; i < extensionlist.Count; i++) //Recorremos las Extensiones
