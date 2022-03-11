@@ -37,5 +37,6 @@
     <Content Include="Writer\gles\InternalGLesToolsWriter.cs" />
     <Content Include="Writer\gles\GlesExtensionsWriter.cs" />
     <Content Include="Writer\gles\GlesInitDelWriterExts.cs" />
+    <Content Include="Writer\gles\GlesInitDelWriter.cs" />
   </ItemGroup>
 </Project>
