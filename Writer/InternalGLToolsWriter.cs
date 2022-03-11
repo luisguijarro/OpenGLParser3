@@ -44,6 +44,7 @@ namespace OpenGLParser
             file.WriteLine(tab + tab + "{"); //Abrimos Método 
 
             file.WriteLine(tab + tab + tab + "IntPtr p_ret = IntPtr.Zero;");
+            file.WriteLine(tab + tab + tab + "if (OS == OperatingSystem.None) {GetOS();}");
             file.WriteLine(tab + tab + tab + "switch(OS)");
             file.WriteLine(tab + tab + tab + "{");
             file.WriteLine(tab + tab + tab + tab + "case OperatingSystem.WindowsVistaOrHigher:");
@@ -155,13 +156,6 @@ namespace OpenGLParser
             file.WriteLine(tab + tab + tab + "switch(Environment.OSVersion.Platform)");
             file.WriteLine(tab + tab + tab + "{");
             file.WriteLine(tab + tab + tab + tab + "case PlatformID.Win32NT:");
-            file.WriteLine(tab + tab + tab + tab + tab + "if (Environment.OSVersion.Version.Major >= 6)");
-            file.WriteLine(tab + tab + tab + tab + tab + "{");
-            file.WriteLine(tab + tab + tab + tab + tab + tab + "OS = OperatingSystem.WindowsVistaOrHigher;");
-            file.WriteLine(tab + tab + tab + tab + tab + tab + "return true;");
-            file.WriteLine(tab + tab + tab + tab + tab + "}");
-            file.WriteLine(tab + tab + tab + tab + tab + "OS = OperatingSystem.Windows;");
-            file.WriteLine(tab + tab + tab + tab + tab + "return true;");
             file.WriteLine(tab + tab + tab + tab + "case PlatformID.Win32S:");
             file.WriteLine(tab + tab + tab + tab + "case PlatformID.Win32Windows:");
             file.WriteLine(tab + tab + tab + tab + "case PlatformID.WinCE:");
@@ -174,7 +168,7 @@ namespace OpenGLParser
 
 	        file.WriteLine(tab + tab + "internal enum OperatingSystem");
             file.WriteLine(tab + tab + "{");
-            file.WriteLine(tab + tab + tab + "Windows, WindowsVistaOrHigher, Linux_X11, Linux_Wayland, NotSuported");
+            file.WriteLine(tab + tab + tab + "None = 0, Windows, Linux_X11, Linux_Wayland, MacOS, NotSuported");
             file.WriteLine(tab + tab + "}");
 
             #endregion
