@@ -29,7 +29,7 @@ namespace OpenGLParser
             }
 
             //Escribir archivos .cs
-            glWriter.Write(@namespace, destination, verbose);
+            glWriter.Write(@namespace, destination, verbose, ogles);
         }
     }
 }
