@@ -150,6 +150,16 @@ namespace OpenGLParser
 
             file.WriteLine(tab+"}"); //Cerramos clase 
             file.WriteLine("}"); //Cerramos namespace 
+            file.WriteLine();
+            file.Close(); //Cerramos Archivo.
+
+            if (verbose) //Si Verbose mode mostramos la finalización del proceso.
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Generated File");
+                Console.ResetColor(); 
+                Console.WriteLine(": GLesMethods.cs");
+            }
         }
     }
 }

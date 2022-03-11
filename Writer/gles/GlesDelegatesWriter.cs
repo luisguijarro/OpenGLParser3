@@ -12,7 +12,7 @@ namespace OpenGLParser
         {
             if (verbose) //Si Verbose mode mostramos inicio del proceso.
             {
-                Console.WriteLine(); Console.WriteLine("Generating File: OpenGLDelegates.cs");
+                Console.WriteLine(); Console.WriteLine("Generating File: GLesDelegates.cs");
             }
             if (!Directory.Exists(outpath)) // Si la ruta no existe la creamos
             {
@@ -53,6 +53,13 @@ namespace OpenGLParser
                 foreach (glVersion vers in glReader.d_gles_versiones.Values)
                 {
                     if (vers.Metodos.Contains(CommandsKeysList[key]))
+                    {
+                        IsGles = true;
+                    }
+                }
+                foreach (glExtension ext in glReader.d_Gles_Extensions.Values)
+                {
+                    if (ext.Metodos.Contains(CommandsKeysList[key]))
                     {
                         IsGles = true;
                     }

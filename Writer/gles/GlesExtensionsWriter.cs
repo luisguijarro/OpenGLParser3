@@ -113,7 +113,7 @@ namespace OpenGLParser
 
                         //Ahora a escribir llamada.
                         string s_llamada = ""+tab+tab+tab+tab + ((commandTemp.ReturnedType != "void") ? "return " : ""); //Definimos si retorna valor.
-                        s_llamada += "internalGLes."+key+"("; //Iniciamos escritura de la llamada a metodo interno delegado.
+                        s_llamada += "internalGLES."+key+"("; //Iniciamos escritura de la llamada a metodo interno delegado.
                         foreach(string keyParam in commandTemp.Parametros.Keys) //Recorremos lista deparametros para añadirlos uno a uno.
                         {
                             s_llamada += keyParam + ", ";

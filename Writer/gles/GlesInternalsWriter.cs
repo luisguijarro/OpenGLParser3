@@ -12,17 +12,17 @@ namespace OpenGLParser
         {
             if (verbose) //Si Verbose mode mostramos inicio del proceso.
             {
-                Console.WriteLine(); Console.WriteLine("Generating File: OpenGLesInternals.cs");
+                Console.WriteLine(); Console.WriteLine("Generating File: GLesInternals.cs");
             }
             if (!Directory.Exists(outpath)) // Si la ruta no existe la creamos
             {
                 Directory.CreateDirectory(outpath);
             }
-            if (File.Exists(outpath + "OpenGLesInternals.cs")) //Si existe algun archivo previo lo eliminamos.
+            if (File.Exists(outpath + "GLesInternals.cs")) //Si existe algun archivo previo lo eliminamos.
             {
-                File.Delete(outpath + "OpenGLesInternals.cs");
+                File.Delete(outpath + "GLesInternals.cs");
             }
-            StreamWriter file = File.CreateText(outpath + "OpenGLesInternals.cs"); //Generamos Contenido del archivo.
+            StreamWriter file = File.CreateText(outpath + "GLesInternals.cs"); //Generamos Contenido del archivo.
             file.WriteLine("// OpenGL|ES Internals.");
             file.WriteLine("// File Created with OpenGL Parser 3.");
             file.WriteLine("// Developed by Luis Guijarro Pérez.");
@@ -35,7 +35,7 @@ namespace OpenGLParser
 
             string tab = "\t"; //Definimos tabulación.
 
-            file.WriteLine(tab+"internal static class internalGLes"); //Declaramos Clase Estatica contenedora de los métodos.
+            file.WriteLine(tab+"internal static class internalGLES"); //Declaramos Clase Estatica contenedora de los métodos.
             file.WriteLine(tab+"{"); //Abrimos clase 
 
 
@@ -50,6 +50,13 @@ namespace OpenGLParser
                 foreach (glVersion vers in glReader.d_gles_versiones.Values)
                 {
                     if (vers.Metodos.Contains(CommandsKeysList[key]))
+                    {
+                        IsGles = true;
+                    }
+                }
+                foreach (glExtension ext in glReader.d_Gles_Extensions.Values)
+                {
+                    if (ext.Metodos.Contains(CommandsKeysList[key]))
                     {
                         IsGles = true;
                     }
@@ -73,7 +80,7 @@ namespace OpenGLParser
                     file.WriteLine();
                 }
 
-                file.WriteLine(tab + tab + "internal static delegatesGLes." + CommandsKeysList[key] + " " + CommandsKeysList[key] + ";");
+                file.WriteLine(tab + tab + "internal static delegatesGLES." + CommandsKeysList[key] + " " + CommandsKeysList[key] + ";");
                 file.WriteLine();
             }
 
@@ -90,7 +97,7 @@ namespace OpenGLParser
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Generated File");
                 Console.ResetColor(); 
-                Console.WriteLine(": OpenGLesInternals.cs");
+                Console.WriteLine(": GLesInternals.cs");
             }
         }
     }
